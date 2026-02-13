@@ -1,0 +1,28 @@
+{
+  "session_title": "Example Session Title",
+  "session_date": "2026-02-13",
+  "characters": [
+    "Player 1 Character",
+    "Player 2 Character",
+    "Player 3 Character"
+  ],
+  "locations": [
+    "Ruined Watchtower",
+    "Eastern Road"
+  ],
+  "factions": [
+    "Known Regional Faction"
+  ],
+  "events": [
+    "Watchtower Investigation",
+    "Route Planning"
+  ],
+  "unresolved_hooks": [
+    "Who was at the tower before the party arrived?",
+    "Why is the faction linked to the watchtower markings?",
+    "What threat is expected along the eastern road?"
+  ],
+  "last_session_narrative": "The party inspected a ruined watchtower, found faction-linked markings, and traced fresh signs of movement toward the eastern road. The group ended by planning how to continue the investigation.",
+  "plain_text_summary": "The session focused on investigation, clue collection, and setting up the next objective.",
+  "backlink_block": "[[Player 1 Character]]\n[[Player 2 Character]]\n[[Player 3 Character]]\n[[Ruined Watchtower]]\n[[Eastern Road]]\n[[Known Regional Faction]]\n[[Watchtower Investigation]]\n[[Route Planning]]"
+}

@@ -1,0 +1,48 @@
+{
+  "sessions": [
+    {
+      "title": "Example Session Title",
+      "date": "2026-02-13",
+      "note_file": "sessions/2026-02-13-example-session-title.md",
+      "transcript_file": "transcripts/example_session.txt"
+    }
+  ],
+  "characters": {
+    "Player 1 Character": [
+      "Example Session Title"
+    ],
+    "Player 2 Character": [
+      "Example Session Title"
+    ],
+    "Player 3 Character": [
+      "Example Session Title"
+    ]
+  },
+  "locations": {
+    "Ruined Watchtower": [
+      "Example Session Title"
+    ],
+    "Eastern Road": [
+      "Example Session Title"
+    ]
+  },
+  "factions": {
+    "Known Regional Faction": [
+      "Example Session Title"
+    ]
+  },
+  "events": {
+    "Watchtower Investigation": [
+      "Example Session Title"
+    ],
+    "Route Planning": [
+      "Example Session Title"
+    ]
+  },
+  "unresolved_hooks": [
+    "Who was at the tower before the party arrived?",
+    "Why is the faction linked to the watchtower markings?",
+    "What threat is expected along the eastern road?"
+  ],
+  "updated_at": "2026-02-13T00:00:00Z"
+}

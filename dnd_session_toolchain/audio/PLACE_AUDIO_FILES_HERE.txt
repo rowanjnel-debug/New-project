@@ -1,0 +1,2 @@
+Put your Discord session recordings in this folder.
+Supported inputs: .mp3, .wav, .m4a, .flac (as supported by ffmpeg/faster-whisper).
