@@ -29,7 +29,30 @@ dnd_session_toolchain/
 `- dnd_pipeline/
 ```
 
-## 1) Install Dependencies
+## 1) Beginner-Friendly Quick Start (Recommended)
+
+Run these in order:
+
+```bash
+cd dnd_session_toolchain
+python run_pipeline.py setup --project-root .
+python run_pipeline.py health-check --project-root . --require-whisper
+python run_pipeline.py wizard --project-root .
+```
+
+If you prefer a non-interactive single command for a new session:
+
+```bash
+python run_pipeline.py process-session --project-root . --audio audio\session_12.mp3 --session-date 2026-02-13
+```
+
+What these do:
+- `setup`: creates `.venv`, installs dependencies, and prepares local environment.
+- `health-check`: gives plain-English pass/fail checks and fixes.
+- `wizard`: guided interactive flow for setup, processing, and applying manual JSON.
+- `process-session`: transcribes audio, cleans stutters/repeats, writes a ChatGPT prompt, and auto-applies JSON if `<transcript>.manual.json` exists.
+
+## 2) Manual Dependency Install (Advanced)
 
 ```bash
 cd dnd_session_toolchain
@@ -40,7 +63,7 @@ pip install -r requirements.txt
 
 You also need `ffmpeg` available on your system path for audio decoding.
 
-## 2) Configure Summarization Mode
+## 3) Configure Summarization Mode
 
 Copy `.env.example` to `.env`:
 
@@ -66,7 +89,7 @@ Example `offline` config:
 }
 ```
 
-## 3) One-Command Full Run
+## 4) One-Command Full Run
 
 Place an audio file in `audio/`, then run:
 
@@ -82,7 +105,7 @@ Outputs:
 - updated entity files in `characters/`, `locations/`, `factions/`, `events/`
 - updated `index.json`
 
-## 4) Manual ChatGPT Website Option (No API Integration)
+## 5) Manual ChatGPT Website Option (No API Integration)
 
 This mode lets you use chatgpt.com manually and paste the response back.
 For best continuity, keep one ongoing chat thread for your campaign and paste each new prompt into that same thread.
@@ -117,21 +140,24 @@ It also includes a campaign-memory snapshot (recent sessions, known entities, op
 python run_pipeline.py apply-json --project-root . --transcript transcripts\session_12.txt --summary-json transcripts\session_12.manual.json --audio audio\session_12.mp3
 ```
 
-## 5) Script Shortcuts
+## 6) Script Shortcuts
 
 - `python scripts\run_full_pipeline.py --project-root . --audio audio\session_12.mp3 --session-date 2026-02-13`
 - `python scripts\transcribe_session.py --project-root . --audio audio\session_12.mp3`
 - `python scripts\clean_transcript.py --project-root . --transcript transcripts\session_12.txt`
 - `python scripts\summarize_session.py --project-root . --transcript transcripts\session_12.txt --audio audio\session_12.mp3 --session-date 2026-02-13`
 - `python scripts\export_markdown.py --project-root . --transcript transcripts\session_12.txt --summary-json transcripts\session_12.manual.json --audio audio\session_12.mp3`
+- `python scripts\setup_toolchain.py --project-root .`
+- `python scripts\wizard.py --project-root .`
+- `python scripts\process_session.py --project-root . --audio audio\session_12.mp3 --session-date 2026-02-13`
 
-## 6) Run Tests
+## 7) Run Tests
 
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
-## JSON Schema Produced by Summarizer
+## 8) JSON Schema Produced by Summarizer
 
 ```json
 {
@@ -152,7 +178,7 @@ python -m unittest discover -s tests -p "test_*.py"
 Note: `events[]` are prompted to use tags for better structure:
 `[IN_WORLD]`, `[RULES]`, `[TABLE_TALK]`, `[META]`.
 
-## Obsidian Import
+## 9) Obsidian Import
 
 1. Open Obsidian vault.
 2. Copy or move this folder's generated note directories:
@@ -163,7 +189,7 @@ Note: `events[]` are prompted to use tags for better structure:
 - `events/`
 3. Keep `index.json` in vault root or in a `meta/` folder for query tooling.
 
-## Example Outputs Included
+## 10) Example Outputs Included
 
 - `transcripts/example_session.txt`
 - `transcripts/example_session.summary.json`
