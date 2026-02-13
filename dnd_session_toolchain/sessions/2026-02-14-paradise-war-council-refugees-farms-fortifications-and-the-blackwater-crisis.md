@@ -1,0 +1,61 @@
+# Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis
+
+Date: 2026-02-14
+Transcript: `transcripts/2026-02-13 21-24-42.txt`
+Audio: `C:/Users/ACT EVENTS/Videos/2026-02-13 21-24-42.mp4`
+Generated: 2026-02-13 22:48:26 UTC
+
+## Previously On
+The previous session was almost entirely table talk and worldbuilding: the group debated Fabricate-style material requirements and whether value-for-metal transmutation feels like cheating, brainstormed how devils and arch devils might operate via contracts, and noted uncertainty about fitting paladins and other D&D mechanics into a story-first campaign structure.
+
+## Last Session Narrative
+This session returned to in-world play with a war council in Paradise. After a recap of escaping Dave and surviving an airship ambush by increasingly competent Star Spawn, the party convened (and forcefully recruited) key civic leaders to confront Paradise's crisis: refugees flooding in, food shortages, low morale, slowed weapon production, and the strategic threat posed by Star Spawn teleportation meteors. The party briefed leaders on recent intel (including the disrupted ritual at Arena Custer and the unknown status of a trade contact), then set a plan: reclaim nearby farms using upgraded tool-weapons, boost harvests with Plant Growth, mobilize refugees into work details, expand fortifications and trenches, and turn the nearby teleportation meteor site into a lethal kill box. Attention shifted to the missing ship captained by the twins and the Blackwater situation—wood shipments halted, agents missing, and reports of strange creatures fighting Star Spawn. The session mixed in practical spell-and-logistics planning for scrying and communications, ending with a report that the mine is abandoned but stocked with iron and crystals while miners (and Dursk's father) are missing.
+
+## Plain Text Summary
+A mostly in-world strategy session in Paradise: the party gathered city leaders, delivered a grim briefing about Star Spawn threats and recent discoveries, and built an action plan to feed and arm the populace, organize refugees into work crews, and strengthen defenses—especially around a nearby teleportation meteor. They also dug into two urgent mysteries: a missing ship led by the twins and the worsening Blackwater/wood-supply crisis. Serena relayed that the mine is abandoned but stocked with iron and crystals, while the miners and Dursk's father are missing. Some rules talk covered scrying requirements and Fabricate limitations.
+
+## Unresolved Hooks
+- What caused Blackwater's wood shipments to stop: Star Spawn incursion, strange creatures, or something else?
+- Where are the missing miners and what happened to Dursk's father?
+- Can Paradise safely reopen or expand farming outside the walls, and who will protect those work parties?
+- Where is the missing ship commanded by the twins, and are they loyal or compromised?
+- What are the strange creatures near Blackwater/mountains/forests that have been seen ripping Star Spawn apart?
+- How should the teleportation meteor near Paradise be fortified (crater/kill box details, access methods, and friendly-use safeguards)?
+- Will the party attempt scrying on the twins, the miners, or both, and do they have a suitable personal connection/object to improve reliability?
+- What is the true status of the trade line with groucher and can it be reestablished for food/supplies?
+- How will Paradise leadership prevent revolt given refugees outside the gates outnumber citizens inside?
+
+## Linked Entities
+Characters: [[Dave]] [[Great]] [[Robert]] [[Tony]] [[Serena]] [[Dursk]] [[Tivi]] [[Bell]] [[Goff]] [[Kathic]] [[Mike]] [[Elaine]] [[the mayor]] [[the twins]] [[the chained one]] [[Tiny]]
+Locations: [[Paradise]] [[Odeo-Mite]] [[Arena Custer]] [[Blackwater]] [[the mine]] [[the mountains]] [[the forests]] [[Idolos harbour]] [[Castle of Control]] [[Castle of Cool]] [[the space between spaces]] [[teleportation meteor]]
+Factions: [[Star Spawn]] [[refugees]] [[the chained one cult]] [[captains]] [[farmers]] [[builders]] [[foundry]] [[miners]] [[Paradise leadership]]
+Events: [[[META] Verified recording/transcription pipeline (OBS capture) and discussed ASR stress-testing and accent challenges.]] [[[IN_WORLD] Recapped that the party escaped Dave (the prison and person and God of contradictions) and returned to Paradise.]] [[[IN_WORLD] Party reported being ambushed on their airship by Star Spawn using siege weapons and noted the Star Spawn have become more competent.]] [[[IN_WORLD] Paradise described as overwhelmed by refugees, low food stocks, low morale, and ongoing Star Spawn pressure; the party has thwarted attacks locally.]] [[[IN_WORLD] Party claimed they hijacked the Star Spawn network of teleportation meteors (teleportation beacons) by taking teleportation keys from Star Spawn leaders.]] [[[IN_WORLD] Convened a council with key leaders in Paradise (foundry master, farmer, wall/construction lead, Harbour Master) at the mayor's house to plan recovery and defense.]] [[[IN_WORLD] Great physically fetched multiple leaders to the meeting, carrying them rapidly through crowds; Longstrider was discussed for speed.]] [[[IN_WORLD] Great delivered an intelligence briefing: trade dealings with groucher were aided but current status unknown; citizens of Odeo-Mite were taken to Arena Custer for a ritual that the party stopped; shared images of an aberration involved.]] [[[IN_WORLD] Leaders reacted with shock; discussion pivoted to immediate needs: food, defense, and stabilizing refugees.]] [[[IN_WORLD] Proposed arming farmers with tool-weapons (farm/weapon hybrids) to reclaim farms, defend themselves, and reduce specialized weapon demand; iron scarcity identified as a constraint.]] [[[IN_WORLD] Proposed incentives: citizenship, tools, jobs, and signing up for defense/work details in exchange for weapons upgrades and food provision.]] [[[IN_WORLD] Great proposed using Plant Growth (8-hour casting) to double yields in a half-mile radius for one year to jump-start food supply.]] [[[IN_WORLD] Planned fortifications beyond Paradise: reinforce walls, build shelters outside, dig trenches/ditches, and fortify the nearby teleportation meteor site into a kill box.]] [[[IN_WORLD] Discussed major city teleportation meteors on Odeon and how the party might exploit the network later; noted a portal/ritual backlash made one portal stop working.]] [[[IN_WORLD] Discussed Blackwater: no contact; wood shipments stopped; reports of strange creatures (not aligned with Star Spawn) and agents failing to return; twins were apparently sent to investigate but left without proper communication equipment.]] [[[IN_WORLD] Addressed political unrest: rumor that Paradise leadership is letting refugees starve outside; planned a public charm/propaganda campaign plus work-details and food distribution to counter the narrative.]] [[[IN_WORLD] Investigated the missing ship: last seen heading south out of the bay then east; sea lanes confirmed to circle the island about a hundred miles; ship commanded by the twins (twin captains) with rumored connection to a lady in Blackwater.]] [[[RULES] Discussed Scrying logistics: acquiring an orb (about 1000 gp) and using a possession/hair/object for save penalties; debated contacting targets via Sending so they can voluntarily fail the save.]] [[[IN_WORLD] Requisitioned a 1000 gp decorative ornament sphere mirror (described as potentially solid silver and extremely heavy) from a shop owner for Tony's scrying needs.]] [[[IN_WORLD] Serena reported from Dursk: the mine appears abandoned; iron already harvested and secure; a large collection of crystals is stashed; Dursk may be able to run the mine if staffed; miners and Dursk's father are missing/unreachable.]] [[[RULES] Talked about Fabricate/material conversion math (gold/silver to iron, weights) and the limitation that Fabricate reflects actual craft processes rather than pure magic transformation.]]
+
+## Backlinks
+[[Paradise]]
+[[Dave]]
+[[Star Spawn]]
+[[teleportation meteor]]
+[[Arena Custer]]
+[[Odeo-Mite]]
+[[Blackwater]]
+[[the mine]]
+[[Dursk]]
+[[Serena]]
+[[Tony]]
+[[Great]]
+[[Robert]]
+[[Bell]]
+[[Kathic]]
+[[Goff]]
+[[Mike]]
+[[Elaine]]
+[[the twins]]
+[[Plant Growth]]
+[[Scrying]]
+[[Sending]]
+[[Fabricate]]
+[[Castle of Control]]
+[[Castle of Cool]]
+[[Idolos harbour]]
+[[the chained one]]

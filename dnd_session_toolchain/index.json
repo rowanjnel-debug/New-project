@@ -11,6 +11,12 @@
       "date": "2026-02-13",
       "note_file": "C:/Users/ACT EVENTS/source/repos/New-project/dnd_session_toolchain/sessions/2026-02-13-rules-talk-fabricate-materials-devils-and-worldbuilding.md",
       "transcript_file": "C:/Users/ACT EVENTS/source/repos/New-project/dnd_session_toolchain/transcripts/2026-02-13 23-11-59.txt"
+    },
+    {
+      "title": "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis",
+      "date": "2026-02-14",
+      "note_file": "C:/Users/ACT EVENTS/source/repos/New-project/dnd_session_toolchain/sessions/2026-02-14-paradise-war-council-refugees-farms-fortifications-and-the-blackwater-crisis.md",
+      "transcript_file": "C:/Users/ACT EVENTS/source/repos/New-project/dnd_session_toolchain/transcripts/2026-02-13 21-24-42.txt"
     }
   ],
   "characters": {
@@ -22,6 +28,54 @@
     ],
     "Player 3 Character": [
       "Example Session Title"
+    ],
+    "Dave": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Great": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Robert": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Tony": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Serena": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Dursk": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Tivi": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Bell": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Goff": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Kathic": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Mike": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Elaine": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the mayor": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the twins": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the chained one": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Tiny": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
     ]
   },
   "locations": {
@@ -30,6 +84,42 @@
     ],
     "Eastern Road": [
       "Example Session Title"
+    ],
+    "Paradise": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Odeo-Mite": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Arena Custer": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Blackwater": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the mine": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the mountains": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the forests": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Idolos harbour": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Castle of Control": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Castle of Cool": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the space between spaces": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "teleportation meteor": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
     ]
   },
   "factions": {
@@ -50,6 +140,33 @@
     ],
     "guilds of the trade": [
       "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "Star Spawn": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "refugees": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "the chained one cult": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "captains": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "farmers": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "builders": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "foundry": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "miners": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "Paradise leadership": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
     ]
   },
   "events": {
@@ -79,6 +196,69 @@
     ],
     "Talked about recording/transcribing sessions and that mixing game talk with real-world talk would confuse a model; mentioned using a transcription tool (whisper or similar) and other transcription tools.": [
       "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "[META] Verified recording/transcription pipeline (OBS capture) and discussed ASR stress-testing and accent challenges.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Recapped that the party escaped Dave (the prison and person and God of contradictions) and returned to Paradise.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Party reported being ambushed on their airship by Star Spawn using siege weapons and noted the Star Spawn have become more competent.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Paradise described as overwhelmed by refugees, low food stocks, low morale, and ongoing Star Spawn pressure; the party has thwarted attacks locally.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Party claimed they hijacked the Star Spawn network of teleportation meteors (teleportation beacons) by taking teleportation keys from Star Spawn leaders.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Convened a council with key leaders in Paradise (foundry master, farmer, wall/construction lead, Harbour Master) at the mayor's house to plan recovery and defense.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Great physically fetched multiple leaders to the meeting, carrying them rapidly through crowds; Longstrider was discussed for speed.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Great delivered an intelligence briefing: trade dealings with groucher were aided but current status unknown; citizens of Odeo-Mite were taken to Arena Custer for a ritual that the party stopped; shared images of an aberration involved.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Leaders reacted with shock; discussion pivoted to immediate needs: food, defense, and stabilizing refugees.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Proposed arming farmers with tool-weapons (farm/weapon hybrids) to reclaim farms, defend themselves, and reduce specialized weapon demand; iron scarcity identified as a constraint.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Proposed incentives: citizenship, tools, jobs, and signing up for defense/work details in exchange for weapons upgrades and food provision.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Great proposed using Plant Growth (8-hour casting) to double yields in a half-mile radius for one year to jump-start food supply.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Planned fortifications beyond Paradise: reinforce walls, build shelters outside, dig trenches/ditches, and fortify the nearby teleportation meteor site into a kill box.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Discussed major city teleportation meteors on Odeon and how the party might exploit the network later; noted a portal/ritual backlash made one portal stop working.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Discussed Blackwater: no contact; wood shipments stopped; reports of strange creatures (not aligned with Star Spawn) and agents failing to return; twins were apparently sent to investigate but left without proper communication equipment.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Addressed political unrest: rumor that Paradise leadership is letting refugees starve outside; planned a public charm/propaganda campaign plus work-details and food distribution to counter the narrative.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Investigated the missing ship: last seen heading south out of the bay then east; sea lanes confirmed to circle the island about a hundred miles; ship commanded by the twins (twin captains) with rumored connection to a lady in Blackwater.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[RULES] Discussed Scrying logistics: acquiring an orb (about 1000 gp) and using a possession/hair/object for save penalties; debated contacting targets via Sending so they can voluntarily fail the save.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Requisitioned a 1000 gp decorative ornament sphere mirror (described as potentially solid silver and extremely heavy) from a shop owner for Tony's scrying needs.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[IN_WORLD] Serena reported from Dursk: the mine appears abandoned; iron already harvested and secure; a large collection of crystals is stashed; Dursk may be able to run the mine if staffed; miners and Dursk's father are missing/unreachable.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
+    ],
+    "[RULES] Talked about Fabricate/material conversion math (gold/silver to iron, weights) and the limitation that Fabricate reflects actual craft processes rather than pure magic transformation.": [
+      "Paradise War Council: Refugees, Farms, Fortifications, and the Blackwater Crisis"
     ]
   },
   "unresolved_hooks": [
@@ -89,7 +269,16 @@
     "How paladins are intended to work in the storyline.",
     "What the plan is for the remaining three fabricates and what keep trying to devils means in-game.",
     "Whether the discussed metal equal to the worth of the object approach is allowed or will be ruled against.",
-    "How the setting's trade-guild power shift and wizard restrictions play out, and how wizards will respond."
+    "How the setting's trade-guild power shift and wizard restrictions play out, and how wizards will respond.",
+    "What caused Blackwater's wood shipments to stop: Star Spawn incursion, strange creatures, or something else?",
+    "Where are the missing miners and what happened to Dursk's father?",
+    "Can Paradise safely reopen or expand farming outside the walls, and who will protect those work parties?",
+    "Where is the missing ship commanded by the twins, and are they loyal or compromised?",
+    "What are the strange creatures near Blackwater/mountains/forests that have been seen ripping Star Spawn apart?",
+    "How should the teleportation meteor near Paradise be fortified (crater/kill box details, access methods, and friendly-use safeguards)?",
+    "Will the party attempt scrying on the twins, the miners, or both, and do they have a suitable personal connection/object to improve reliability?",
+    "What is the true status of the trade line with groucher and can it be reestablished for food/supplies?",
+    "How will Paradise leadership prevent revolt given refugees outside the gates outnumber citizens inside?"
   ],
-  "updated_at": "2026-02-13T21:40:21Z"
+  "updated_at": "2026-02-13T22:48:27Z"
 }
