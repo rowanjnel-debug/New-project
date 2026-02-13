@@ -122,6 +122,12 @@ python run_pipeline.py apply-json --project-root . --transcript transcripts\sess
 - `python scripts\summarize_session.py --project-root . --transcript transcripts\session_12.txt --audio audio\session_12.mp3 --session-date 2026-02-13`
 - `python scripts\export_markdown.py --project-root . --transcript transcripts\session_12.txt --summary-json transcripts\session_12.manual.json --audio audio\session_12.mp3`
 
+## 6) Run Tests
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+```
+
 ## JSON Schema Produced by Summarizer
 
 ```json

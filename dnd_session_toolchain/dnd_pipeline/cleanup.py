@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from pathlib import Path
 
 
 WORD_RE = re.compile(r"[A-Za-z0-9]+(?:['&-][A-Za-z0-9]+)*")
@@ -129,3 +130,26 @@ def clean_transcript_text(raw_text: str) -> tuple[str, CleanupStats]:
         words_out=words_out,
     )
     return cleaned_text + ("\n" if cleaned_text else ""), stats
+
+
+def choose_prompt_source(transcript_path: Path, mode: str) -> Path:
+    """Choose transcript source for prompt generation.
+
+    Modes:
+    - auto: use <transcript>.cleaned.txt when present, otherwise original
+    - always: require <transcript>.cleaned.txt
+    - never: always use original transcript
+    """
+    cleaned_candidate = transcript_path.with_suffix(".cleaned.txt")
+    mode_value = mode.strip().lower()
+
+    if mode_value == "never":
+        return transcript_path
+    if mode_value == "auto":
+        return cleaned_candidate if cleaned_candidate.exists() else transcript_path
+    if mode_value == "always":
+        if cleaned_candidate.exists():
+            return cleaned_candidate
+        raise FileNotFoundError(f"Expected cleaned transcript not found: {cleaned_candidate}")
+
+    raise ValueError(f"Unsupported prompt source mode: {mode}")

@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from .cleanup import clean_transcript_text
+from .cleanup import choose_prompt_source, clean_transcript_text
 from .config import load_model_config
 from .indexing import update_index
 from .markdown_export import render_session_markdown, update_entity_pages
@@ -86,19 +86,7 @@ def cmd_prepare_prompt(args: argparse.Namespace) -> None:
     base_dir = Path(args.project_root).resolve()
     ensure_project_structure(base_dir)
     transcript_path = _resolve_path(base_dir, args.transcript)
-    cleaned_candidate = transcript_path.with_suffix(".cleaned.txt")
-
-    source_path = transcript_path
-    if args.use_cleaned == "always":
-        source_path = cleaned_candidate
-    elif args.use_cleaned == "auto" and cleaned_candidate.exists():
-        source_path = cleaned_candidate
-
-    if args.use_cleaned == "always" and not cleaned_candidate.exists():
-        raise FileNotFoundError(
-            f"Expected cleaned transcript not found: {cleaned_candidate}"
-        )
-
+    source_path = choose_prompt_source(transcript_path, args.use_cleaned)
     transcript = source_path.read_text(encoding="utf-8")
     prompt = build_manual_chatgpt_prompt(transcript, args.session_date)
     prompt_path = transcript_path.with_suffix(".chatgpt_prompt.txt")
