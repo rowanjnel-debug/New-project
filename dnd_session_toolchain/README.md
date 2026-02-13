@@ -92,15 +92,23 @@ This mode lets you use chatgpt.com manually and paste the response back.
 python run_pipeline.py transcribe --project-root . --audio audio\session_12.mp3
 ```
 
-2. Generate a paste-ready prompt:
+2. Optional: clean stutters/repeats in transcript:
+
+```bash
+python run_pipeline.py clean-transcript --project-root . --transcript transcripts\session_12.txt
+```
+
+3. Generate a paste-ready prompt:
 
 ```bash
 python run_pipeline.py prepare-prompt --project-root . --transcript transcripts\session_12.txt --session-date 2026-02-13
 ```
+By default, this uses `transcripts\session_12.cleaned.txt` if it exists.
+Use `--use-cleaned never` to force the original transcript, or `--use-cleaned always` to require the cleaned file.
 
-3. Paste `transcripts/session_12.chatgpt_prompt.txt` into chatgpt.com.
-4. Save the returned JSON to `transcripts/session_12.manual.json`.
-5. Apply JSON and export notes:
+4. Paste `transcripts/session_12.chatgpt_prompt.txt` into chatgpt.com.
+5. Save the returned JSON to `transcripts/session_12.manual.json`.
+6. Apply JSON and export notes:
 
 ```bash
 python run_pipeline.py apply-json --project-root . --transcript transcripts\session_12.txt --summary-json transcripts\session_12.manual.json --audio audio\session_12.mp3
@@ -110,6 +118,7 @@ python run_pipeline.py apply-json --project-root . --transcript transcripts\sess
 
 - `python scripts\run_full_pipeline.py --project-root . --audio audio\session_12.mp3 --session-date 2026-02-13`
 - `python scripts\transcribe_session.py --project-root . --audio audio\session_12.mp3`
+- `python scripts\clean_transcript.py --project-root . --transcript transcripts\session_12.txt`
 - `python scripts\summarize_session.py --project-root . --transcript transcripts\session_12.txt --audio audio\session_12.mp3 --session-date 2026-02-13`
 - `python scripts\export_markdown.py --project-root . --transcript transcripts\session_12.txt --summary-json transcripts\session_12.manual.json --audio audio\session_12.mp3`
 
