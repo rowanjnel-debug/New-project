@@ -13,7 +13,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from dnd_pipeline.indexing import get_previous_session_context  # noqa: E402
+from dnd_pipeline.indexing import get_campaign_memory_context, get_previous_session_context  # noqa: E402
 from dnd_pipeline.models import SessionSummary  # noqa: E402
 from dnd_pipeline.summarization import (  # noqa: E402
     build_manual_chatgpt_prompt,
@@ -85,6 +85,37 @@ class PreviousContextTests(unittest.TestCase):
             self.assertEqual(context["previously_on"], "Earlier recap.")
             self.assertEqual(context["unresolved_hooks"], ["Hook 1"])
 
+    def test_get_campaign_memory_context_builds_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            base = Path(tmp_dir)
+            transcripts = base / "transcripts"
+            transcripts.mkdir(parents=True, exist_ok=True)
+
+            t1 = transcripts / "s1.txt"
+            t2 = transcripts / "s2.txt"
+            t1.write_text("a", encoding="utf-8")
+            t2.write_text("b", encoding="utf-8")
+
+            index_payload = {
+                "sessions": [
+                    {"title": "S1", "date": "2026-02-01", "note_file": "sessions/s1.md", "transcript_file": "transcripts/s1.txt"},
+                    {"title": "S2", "date": "2026-02-02", "note_file": "sessions/s2.md", "transcript_file": "transcripts/s2.txt"},
+                ],
+                "characters": {"Aria": ["S1"]},
+                "locations": {"Oakwatch": ["S1"]},
+                "factions": {"Guild": ["S2"]},
+                "events": {"Ambush": ["S1"]},
+                "unresolved_hooks": ["Who betrayed the group?"],
+                "updated_at": "",
+            }
+            index_path = base / "index.json"
+            index_path.write_text(json.dumps(index_payload), encoding="utf-8")
+
+            memory = get_campaign_memory_context(index_path, t2)
+            self.assertEqual(memory["historical_session_count"], 1)
+            self.assertIn("Aria", memory["known_characters"])
+            self.assertIn("Who betrayed the group?", memory["open_hooks"])
+
 
 class PreviouslyOnPromptTests(unittest.TestCase):
     """Tests for previously_on construction and prompt inclusion."""
@@ -104,6 +135,25 @@ class PreviouslyOnPromptTests(unittest.TestCase):
         prompt = build_manual_chatgpt_prompt("New transcript here", "2026-02-13", context)
         self.assertIn("Previous session context:", prompt)
         self.assertIn("Who betrayed the group?", prompt)
+
+    def test_build_manual_prompt_contains_campaign_memory(self) -> None:
+        campaign_memory = {
+            "historical_session_count": 3,
+            "recent_sessions": [{"title": "S3", "date": "2026-02-12"}],
+            "known_characters": ["Aria"],
+            "known_locations": ["Oakwatch"],
+            "known_factions": ["Guild"],
+            "known_events": ["Ambush"],
+            "open_hooks": ["Find the relic."],
+        }
+        prompt = build_manual_chatgpt_prompt(
+            "New transcript here",
+            "2026-02-13",
+            previous_context=None,
+            campaign_memory=campaign_memory,
+        )
+        self.assertIn("Campaign memory context:", prompt)
+        self.assertIn("known_characters: Aria", prompt)
 
     def test_markdown_uses_previously_on(self) -> None:
         summary = SessionSummary(

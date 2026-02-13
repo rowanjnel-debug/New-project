@@ -33,6 +33,7 @@ Rules:
 - Extract only information supported by transcript text.
 - If information is missing, return empty list or concise fallback text.
 - Distinguish in-world play from table/rules/meta conversation.
+- Maintain continuity with prior context in this prompt and prior messages in the same chat thread.
 
 Field quality rules:
 - previously_on: 1 short paragraph summarizing prior session context only.
@@ -94,9 +95,41 @@ def _format_previous_context(previous_context: dict[str, object] | None) -> str:
     elif narrative:
         lines.append(f"- narrative: {narrative}")
     if hooks:
-        lines.append("- unresolved_hooks:")
-        for hook in hooks[:8]:
-            lines.append(f"  - {hook}")
+        lines.append(f"- unresolved_hooks: {'; '.join(hooks[:8])}")
+    return "\n".join(lines).strip()
+
+
+def _format_campaign_memory_context(campaign_memory: dict[str, object] | None) -> str:
+    """Format campaign-wide memory block for prompt input."""
+    if not campaign_memory:
+        return ""
+
+    recent_sessions = campaign_memory.get("recent_sessions", [])
+    known_characters = campaign_memory.get("known_characters", [])
+    known_locations = campaign_memory.get("known_locations", [])
+    known_factions = campaign_memory.get("known_factions", [])
+    known_events = campaign_memory.get("known_events", [])
+    open_hooks = campaign_memory.get("open_hooks", [])
+    count = int(campaign_memory.get("historical_session_count", 0) or 0)
+
+    lines = [f"Campaign memory context: historical_sessions={count}"]
+    if recent_sessions:
+        formatted = []
+        for item in recent_sessions:
+            title = str(item.get("title", "")).strip()
+            date = str(item.get("date", "")).strip()
+            formatted.append(f"{title} ({date})".strip())
+        lines.append(f"- recent_sessions: {' | '.join(v for v in formatted if v)}")
+    if known_characters:
+        lines.append(f"- known_characters: {', '.join(str(v) for v in known_characters)}")
+    if known_locations:
+        lines.append(f"- known_locations: {', '.join(str(v) for v in known_locations)}")
+    if known_factions:
+        lines.append(f"- known_factions: {', '.join(str(v) for v in known_factions)}")
+    if known_events:
+        lines.append(f"- known_events: {', '.join(str(v) for v in known_events)}")
+    if open_hooks:
+        lines.append(f"- campaign_open_hooks: {'; '.join(str(v) for v in open_hooks)}")
     return "\n".join(lines).strip()
 
 
@@ -134,13 +167,17 @@ def _build_user_prompt(
     transcript: str,
     session_date: str,
     previous_context: dict[str, object] | None = None,
+    campaign_memory: dict[str, object] | None = None,
 ) -> str:
     """Create user prompt for model inference."""
     previous_block = _format_previous_context(previous_context)
+    memory_block = _format_campaign_memory_context(campaign_memory)
     previous_part = f"{previous_block}\n\n" if previous_block else ""
+    memory_part = f"{memory_block}\n\n" if memory_block else ""
     return (
         f"Session date: {session_date}\n\n"
         f"{previous_part}"
+        f"{memory_part}"
         "Transcript:\n"
         f"{transcript}\n\n"
         "Generate structured campaign notes as specified."
@@ -151,12 +188,14 @@ def build_manual_chatgpt_prompt(
     transcript: str,
     session_date: str,
     previous_context: dict[str, object] | None = None,
+    campaign_memory: dict[str, object] | None = None,
 ) -> str:
     """Build a copy/paste prompt for manual use on chatgpt.com."""
     return (
         f"{SYSTEM_PROMPT}\n\n"
+        "If you are in an ongoing chat thread, treat prior assistant outputs as canonical campaign memory unless corrected.\n\n"
         "Return only JSON. Do not include markdown fences.\n\n"
-        f"{_build_user_prompt(transcript, session_date, previous_context)}\n"
+        f"{_build_user_prompt(transcript, session_date, previous_context, campaign_memory)}\n"
     )
 
 
@@ -165,6 +204,7 @@ def _summarize_with_ollama(
     session_date: str,
     config: ModelConfig,
     previous_context: dict[str, object] | None = None,
+    campaign_memory: dict[str, object] | None = None,
 ) -> str:
     """Run summarization against a local Ollama model."""
     import requests
@@ -172,7 +212,7 @@ def _summarize_with_ollama(
     payload = {
         "model": config.model,
         "stream": False,
-        "prompt": f"{SYSTEM_PROMPT}\n\n{_build_user_prompt(transcript, session_date, previous_context)}",
+        "prompt": f"{SYSTEM_PROMPT}\n\n{_build_user_prompt(transcript, session_date, previous_context, campaign_memory)}",
         "options": {"temperature": config.temperature},
     }
     response = requests.post(
@@ -190,6 +230,7 @@ def _summarize_with_openai_compatible(
     session_date: str,
     config: ModelConfig,
     previous_context: dict[str, object] | None = None,
+    campaign_memory: dict[str, object] | None = None,
 ) -> str:
     """Run summarization against an OpenAI-compatible chat endpoint."""
     import requests
@@ -203,7 +244,7 @@ def _summarize_with_openai_compatible(
         "max_tokens": config.max_tokens,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": _build_user_prompt(transcript, session_date, previous_context)},
+            {"role": "user", "content": _build_user_prompt(transcript, session_date, previous_context, campaign_memory)},
         ],
         "response_format": {"type": "json_object"},
     }
@@ -260,15 +301,28 @@ def summarize_transcript(
     session_date: str,
     config: ModelConfig,
     previous_context: dict[str, object] | None = None,
+    campaign_memory: dict[str, object] | None = None,
 ) -> SessionSummary:
     """Generate structured summary from transcript using configured provider."""
     provider = config.provider.strip().lower()
 
     try:
         if provider == "ollama":
-            raw = _summarize_with_ollama(transcript, session_date, config, previous_context)
+            raw = _summarize_with_ollama(
+                transcript,
+                session_date,
+                config,
+                previous_context,
+                campaign_memory,
+            )
         elif provider in {"openai", "openai_compatible"}:
-            raw = _summarize_with_openai_compatible(transcript, session_date, config, previous_context)
+            raw = _summarize_with_openai_compatible(
+                transcript,
+                session_date,
+                config,
+                previous_context,
+                campaign_memory,
+            )
         elif provider in {"heuristic", "offline"}:
             return _heuristic_fallback(transcript, session_date, previous_context)
         else:

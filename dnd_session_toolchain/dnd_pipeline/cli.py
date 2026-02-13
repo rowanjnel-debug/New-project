@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .cleanup import choose_prompt_source, clean_transcript_text
 from .config import load_model_config
-from .indexing import get_previous_session_context, update_index
+from .indexing import get_campaign_memory_context, get_previous_session_context, update_index
 from .markdown_export import render_session_markdown, update_entity_pages
 from .summarization import (
     build_previously_on_text,
@@ -92,11 +92,16 @@ def cmd_prepare_prompt(args: argparse.Namespace) -> None:
         base_dir / "index.json",
         transcript_path,
     )
+    campaign_memory = get_campaign_memory_context(
+        base_dir / "index.json",
+        transcript_path,
+    )
     transcript = source_path.read_text(encoding="utf-8")
     prompt = build_manual_chatgpt_prompt(
         transcript,
         args.session_date,
         previous_context=previous_context,
+        campaign_memory=campaign_memory,
     )
     prompt_path = transcript_path.with_suffix(".chatgpt_prompt.txt")
     prompt_path.write_text(prompt, encoding="utf-8")
@@ -107,6 +112,13 @@ def cmd_prepare_prompt(args: argparse.Namespace) -> None:
         print(f"Prompt previous context: {title} ({date})".strip())
     else:
         print("Prompt previous context: none found")
+    print(
+        "Prompt campaign memory: "
+        f"{int(campaign_memory.get('historical_session_count', 0))} prior sessions, "
+        f"{len(campaign_memory.get('known_characters', []))} characters, "
+        f"{len(campaign_memory.get('known_locations', []))} locations, "
+        f"{len(campaign_memory.get('known_factions', []))} factions"
+    )
     print(f"Prompt written: {prompt_path}")
 
 
@@ -167,6 +179,10 @@ def cmd_summarize(args: argparse.Namespace) -> None:
         base_dir / "index.json",
         transcript_path,
     )
+    campaign_memory = get_campaign_memory_context(
+        base_dir / "index.json",
+        transcript_path,
+    )
     transcript = transcript_path.read_text(encoding="utf-8")
 
     summary = summarize_transcript(
@@ -174,6 +190,7 @@ def cmd_summarize(args: argparse.Namespace) -> None:
         args.session_date,
         config,
         previous_context=previous_context,
+        campaign_memory=campaign_memory,
     )
     write_summary_json(summary, transcript_path.with_suffix(".summary.json"))
     session_file = _finalize_outputs(base_dir, summary, transcript_path, audio_path)
@@ -199,11 +216,16 @@ def cmd_run(args: argparse.Namespace) -> None:
         base_dir / "index.json",
         transcript_path,
     )
+    campaign_memory = get_campaign_memory_context(
+        base_dir / "index.json",
+        transcript_path,
+    )
     summary = summarize_transcript(
         result.text,
         args.session_date,
         config,
         previous_context=previous_context,
+        campaign_memory=campaign_memory,
     )
     write_summary_json(summary, transcript_path.with_suffix(".summary.json"))
     session_file = _finalize_outputs(base_dir, summary, transcript_path, audio_path)

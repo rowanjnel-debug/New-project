@@ -102,6 +102,68 @@ def get_previous_session_context(
     return None
 
 
+def _trim_list(values: list[str], limit: int, max_chars: int = 120) -> list[str]:
+    """Return a trimmed list of non-empty unique strings preserving order."""
+    out: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        clean = str(value).strip()
+        if not clean:
+            continue
+        key = clean.casefold()
+        if key in seen:
+            continue
+        seen.add(key)
+        if len(clean) > max_chars:
+            clean = clean[: max_chars - 3].rstrip() + "..."
+        out.append(clean)
+        if len(out) >= limit:
+            break
+    return out
+
+
+def get_campaign_memory_context(
+    index_path: Path,
+    current_transcript_path: Path,
+) -> dict[str, Any]:
+    """Build campaign-wide memory snapshot to improve cross-session continuity."""
+    index = load_index(index_path)
+    sessions = index.get("sessions", [])
+    current_key = _path_key(current_transcript_path)
+
+    historical_sessions: list[dict[str, str]] = []
+    for record in sessions:
+        transcript_value = str(record.get("transcript_file", "")).strip()
+        if not transcript_value:
+            continue
+        transcript_path = _resolve_index_path(index_path, transcript_value)
+        if _path_key(transcript_path) == current_key:
+            continue
+        historical_sessions.append(
+            {
+                "title": str(record.get("title", "")).strip(),
+                "date": str(record.get("date", "")).strip(),
+            }
+        )
+
+    recent_sessions = historical_sessions[-5:]
+    known_characters = _trim_list(list(index.get("characters", {}).keys()), 30, max_chars=80)
+    known_locations = _trim_list(list(index.get("locations", {}).keys()), 30, max_chars=80)
+    known_factions = _trim_list(list(index.get("factions", {}).keys()), 30, max_chars=80)
+    known_events = _trim_list(list(index.get("events", {}).keys()), 15, max_chars=100)
+    open_hooks = _trim_list([str(v) for v in index.get("unresolved_hooks", [])], 10, max_chars=120)
+
+    return {
+        "historical_session_count": len(historical_sessions),
+        "recent_sessions": recent_sessions,
+        "known_characters": known_characters,
+        "known_locations": known_locations,
+        "known_factions": known_factions,
+        "known_events": known_events,
+        "open_hooks": open_hooks,
+    }
+
+
 def _add_entity(index: dict[str, Any], bucket: str, entity_name: str, session_title: str) -> None:
     """Track entity occurrences by session title."""
     entries = index.setdefault(bucket, {})

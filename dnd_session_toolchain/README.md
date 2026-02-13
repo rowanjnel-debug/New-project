@@ -85,6 +85,7 @@ Outputs:
 ## 4) Manual ChatGPT Website Option (No API Integration)
 
 This mode lets you use chatgpt.com manually and paste the response back.
+For best continuity, keep one ongoing chat thread for your campaign and paste each new prompt into that same thread.
 
 1. Transcribe only:
 
@@ -106,6 +107,7 @@ python run_pipeline.py prepare-prompt --project-root . --transcript transcripts\
 By default, this uses `transcripts\session_12.cleaned.txt` if it exists.
 Use `--use-cleaned never` to force the original transcript, or `--use-cleaned always` to require the cleaned file.
 The prompt also automatically includes context from the most recent prior session in `index.json` to produce a "Previously On" recap.
+It also includes a campaign-memory snapshot (recent sessions, known entities, open hooks) so the model can maintain long-running story continuity.
 
 4. Paste `transcripts/session_12.chatgpt_prompt.txt` into chatgpt.com.
 5. Save the returned JSON to `transcripts/session_12.manual.json`.
