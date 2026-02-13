@@ -1,0 +1,35 @@
+# Rules Talk: Fabricate, Materials, Devils, and Worldbuilding
+
+Date: 2026-02-13
+Transcript: `transcripts/2026-02-13 23-11-59.txt`
+Audio: `C:/Users/ACT EVENTS/Videos/2026-02-13 23-11-59.mp4`
+Generated: 2026-02-13 21:40:21 UTC
+
+## Last Session Narrative
+The session was largely out-of-character discussion about rules, materials, and setting design. The group debated how creation effects work (what counts as raw material, whether metal can be transmuted into an object of equal value, and whether that feels like cheating). They also brainstormed how devils and arch devils might be governed by contracts and rules, and acknowledged ongoing uncertainty about fitting certain classes (notably paladins) into a storyline originally written without full system knowledge. A chunk of time was spent on worldbuilding about shifting power toward trade guilds, limiting wizard influence, and anticipating wizard backlash, along with meta-talk about recording/transcribing sessions and training a model to separate game content from unrelated conversation.
+
+## Plain Text Summary
+Mostly a meta/rules and worldbuilding discussion: crafting/transmutation materials and Fabricate usage, devil/archdevil contract logic, difficulties aligning paladins and D&D mechanics with a prewritten storyline, and setting ideas about empowering trade guilds while restricting wizards. Also discussed session recording/transcription tools (e.g., Whisper) and concerns about mixing game talk with real-world talk in transcripts.
+
+## Unresolved Hooks
+- How devils/arch devils contracts and rules function in this campaign context.
+- How paladins are intended to work in the storyline.
+- What the plan is for the remaining three fabricates and what keep trying to devils means in-game.
+- Whether the discussed metal equal to the worth of the object approach is allowed or will be ruled against.
+- How the setting's trade-guild power shift and wizard restrictions play out, and how wizards will respond.
+
+## Linked Entities
+Characters: 
+Locations: 
+Factions: [[devils]] [[arch devils]] [[wizards]] [[the guilds]] [[guilds of the trade]]
+Events: [[Discussed whether an ability/ritual requires raw materials and what counts as valid materials (e.g., metal, wood; sawdust is not a raw material).]] [[Described a process where you lay out metal equal to the worth of the object and turn that metal into an object that includes metal; called this cheating.]] [[Talked about devils/arch devils and how their contracts and rules work; compared them to gods.]] [[One speaker stated they still have three fabricates remaining and intends to keep trying something involving devils.]] [[Discussed difficulty of adapting D&D mechanics (including paladins) to fit a prewritten storyline versus building the story from D&D.]] [[Shared background worldbuilding: an entity/government for one century, shifting power to trade guilds, developing trade, restricting or limiting wizards, and wizard opposition (trying to get around rules/walls) to create/enrich themselves with magic.]] [[Talked about recording/transcribing sessions and that mixing game talk with real-world talk would confuse a model; mentioned using a transcription tool (whisper or similar) and other transcription tools.]]
+
+## Backlinks
+[[devils]]
+[[arch devils]]
+[[wizards]]
+[[the guilds]]
+[[guilds of the trade]]
+[[Fabricate]]
+[[paladins]]
+[[Whisper]]

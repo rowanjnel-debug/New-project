@@ -5,6 +5,12 @@
       "date": "2026-02-13",
       "note_file": "sessions/2026-02-13-example-session-title.md",
       "transcript_file": "transcripts/example_session.txt"
+    },
+    {
+      "title": "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding",
+      "date": "2026-02-13",
+      "note_file": "C:/Users/ACT EVENTS/source/repos/New-project/dnd_session_toolchain/sessions/2026-02-13-rules-talk-fabricate-materials-devils-and-worldbuilding.md",
+      "transcript_file": "C:/Users/ACT EVENTS/source/repos/New-project/dnd_session_toolchain/transcripts/2026-02-13 23-11-59.txt"
     }
   ],
   "characters": {
@@ -29,6 +35,21 @@
   "factions": {
     "Known Regional Faction": [
       "Example Session Title"
+    ],
+    "devils": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "arch devils": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "wizards": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "the guilds": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "guilds of the trade": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
     ]
   },
   "events": {
@@ -37,12 +58,38 @@
     ],
     "Route Planning": [
       "Example Session Title"
+    ],
+    "Discussed whether an ability/ritual requires raw materials and what counts as valid materials (e.g., metal, wood; sawdust is not a raw material).": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "Described a process where you lay out metal equal to the worth of the object and turn that metal into an object that includes metal; called this cheating.": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "Talked about devils/arch devils and how their contracts and rules work; compared them to gods.": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "One speaker stated they still have three fabricates remaining and intends to keep trying something involving devils.": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "Discussed difficulty of adapting D&D mechanics (including paladins) to fit a prewritten storyline versus building the story from D&D.": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "Shared background worldbuilding: an entity/government for one century, shifting power to trade guilds, developing trade, restricting or limiting wizards, and wizard opposition (trying to get around rules/walls) to create/enrich themselves with magic.": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
+    ],
+    "Talked about recording/transcribing sessions and that mixing game talk with real-world talk would confuse a model; mentioned using a transcription tool (whisper or similar) and other transcription tools.": [
+      "Rules Talk: Fabricate, Materials, Devils, and Worldbuilding"
     ]
   },
   "unresolved_hooks": [
     "Who was at the tower before the party arrived?",
     "Why is the faction linked to the watchtower markings?",
-    "What threat is expected along the eastern road?"
+    "What threat is expected along the eastern road?",
+    "How devils/arch devils contracts and rules function in this campaign context.",
+    "How paladins are intended to work in the storyline.",
+    "What the plan is for the remaining three fabricates and what keep trying to devils means in-game.",
+    "Whether the discussed metal equal to the worth of the object approach is allowed or will be ruled against.",
+    "How the setting's trade-guild power shift and wizard restrictions play out, and how wizards will respond."
   ],
-  "updated_at": "2026-02-13T00:00:00Z"
+  "updated_at": "2026-02-13T21:40:21Z"
 }

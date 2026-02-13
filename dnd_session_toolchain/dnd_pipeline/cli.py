@@ -35,14 +35,22 @@ def _resolve_path(base_dir: Path, user_path: str) -> Path:
     return base_dir / path
 
 
+def _display_path(path: Path, base_dir: Path) -> str:
+    """Render a path relative to base_dir when possible, otherwise absolute."""
+    try:
+        return str(path.relative_to(base_dir).as_posix())
+    except ValueError:
+        return str(path.as_posix())
+
+
 def _finalize_outputs(base_dir: Path, summary, transcript_path: Path, audio_path: Path) -> Path:
     """Write session markdown, entity pages, and campaign index."""
     slug = slugify(summary.session_title)
     session_file = base_dir / "sessions" / f"{summary.session_date}-{slug}.md"
     markdown = render_session_markdown(
         summary,
-        transcript_file=str(transcript_path.relative_to(base_dir).as_posix()),
-        audio_file=str(audio_path.relative_to(base_dir).as_posix()),
+        transcript_file=_display_path(transcript_path, base_dir),
+        audio_file=_display_path(audio_path, base_dir),
     )
     session_file.write_text(markdown, encoding="utf-8")
     update_entity_pages(base_dir, summary)
