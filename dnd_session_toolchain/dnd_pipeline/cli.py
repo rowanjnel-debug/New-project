@@ -7,9 +7,10 @@ from pathlib import Path
 
 from .cleanup import choose_prompt_source, clean_transcript_text
 from .config import load_model_config
-from .indexing import update_index
+from .indexing import get_previous_session_context, update_index
 from .markdown_export import render_session_markdown, update_entity_pages
 from .summarization import (
+    build_previously_on_text,
     build_manual_chatgpt_prompt,
     parse_summary_json_text,
     summarize_transcript,
@@ -87,11 +88,25 @@ def cmd_prepare_prompt(args: argparse.Namespace) -> None:
     ensure_project_structure(base_dir)
     transcript_path = _resolve_path(base_dir, args.transcript)
     source_path = choose_prompt_source(transcript_path, args.use_cleaned)
+    previous_context = get_previous_session_context(
+        base_dir / "index.json",
+        transcript_path,
+    )
     transcript = source_path.read_text(encoding="utf-8")
-    prompt = build_manual_chatgpt_prompt(transcript, args.session_date)
+    prompt = build_manual_chatgpt_prompt(
+        transcript,
+        args.session_date,
+        previous_context=previous_context,
+    )
     prompt_path = transcript_path.with_suffix(".chatgpt_prompt.txt")
     prompt_path.write_text(prompt, encoding="utf-8")
     print(f"Prompt source transcript: {source_path}")
+    if previous_context:
+        title = str(previous_context.get("session_title", "")).strip()
+        date = str(previous_context.get("session_date", "")).strip()
+        print(f"Prompt previous context: {title} ({date})".strip())
+    else:
+        print("Prompt previous context: none found")
     print(f"Prompt written: {prompt_path}")
 
 
@@ -127,8 +142,14 @@ def cmd_apply_json(args: argparse.Namespace) -> None:
     transcript_path = _resolve_path(base_dir, args.transcript)
     json_path = _resolve_path(base_dir, args.summary_json)
     audio_path = _resolve_path(base_dir, args.audio)
+    previous_context = get_previous_session_context(
+        base_dir / "index.json",
+        transcript_path,
+    )
 
     summary = parse_summary_json_text(json_path.read_text(encoding="utf-8"))
+    if not summary.previously_on:
+        summary.previously_on = build_previously_on_text(previous_context, summary.session_date)
     write_summary_json(summary, transcript_path.with_suffix(".summary.json"))
     session_file = _finalize_outputs(base_dir, summary, transcript_path, audio_path)
     print(f"Session note written: {session_file}")
@@ -142,9 +163,18 @@ def cmd_summarize(args: argparse.Namespace) -> None:
     transcript_path = _resolve_path(base_dir, args.transcript)
     audio_path = _resolve_path(base_dir, args.audio)
     config = load_model_config(_resolve_path(base_dir, args.config))
+    previous_context = get_previous_session_context(
+        base_dir / "index.json",
+        transcript_path,
+    )
     transcript = transcript_path.read_text(encoding="utf-8")
 
-    summary = summarize_transcript(transcript, args.session_date, config)
+    summary = summarize_transcript(
+        transcript,
+        args.session_date,
+        config,
+        previous_context=previous_context,
+    )
     write_summary_json(summary, transcript_path.with_suffix(".summary.json"))
     session_file = _finalize_outputs(base_dir, summary, transcript_path, audio_path)
     print(f"Session note written: {session_file}")
@@ -165,7 +195,16 @@ def cmd_run(args: argparse.Namespace) -> None:
     write_transcription_files(result, transcript_path)
 
     config = load_model_config(_resolve_path(base_dir, args.config))
-    summary = summarize_transcript(result.text, args.session_date, config)
+    previous_context = get_previous_session_context(
+        base_dir / "index.json",
+        transcript_path,
+    )
+    summary = summarize_transcript(
+        result.text,
+        args.session_date,
+        config,
+        previous_context=previous_context,
+    )
     write_summary_json(summary, transcript_path.with_suffix(".summary.json"))
     session_file = _finalize_outputs(base_dir, summary, transcript_path, audio_path)
 

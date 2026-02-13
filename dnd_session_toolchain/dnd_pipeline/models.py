@@ -33,6 +33,7 @@ class SessionSummary:
     factions: list[str] = field(default_factory=list)
     events: list[str] = field(default_factory=list)
     unresolved_hooks: list[str] = field(default_factory=list)
+    previously_on: str = ""
     last_session_narrative: str = ""
     plain_text_summary: str = ""
     backlink_block: str = ""
@@ -46,6 +47,7 @@ class SessionSummary:
         self.factions = _normalize_list(self.factions)
         self.events = _normalize_list(self.events)
         self.unresolved_hooks = _normalize_list(self.unresolved_hooks)
+        self.previously_on = self.previously_on.strip()
         self.last_session_narrative = self.last_session_narrative.strip()
         self.plain_text_summary = self.plain_text_summary.strip()
         self.backlink_block = self.backlink_block.strip()
@@ -75,6 +77,7 @@ class SessionSummary:
             factions=[str(v) for v in payload.get("factions", [])],
             events=[str(v) for v in payload.get("events", [])],
             unresolved_hooks=[str(v) for v in payload.get("unresolved_hooks", [])],
+            previously_on=str(payload.get("previously_on", "")),
             last_session_narrative=str(payload.get("last_session_narrative", "")),
             plain_text_summary=str(payload.get("plain_text_summary", "")),
             backlink_block=str(payload.get("backlink_block", "")),
@@ -91,6 +94,7 @@ class SessionSummary:
             "factions": self.factions,
             "events": self.events,
             "unresolved_hooks": self.unresolved_hooks,
+            "previously_on": self.previously_on,
             "last_session_narrative": self.last_session_narrative,
             "plain_text_summary": self.plain_text_summary,
             "backlink_block": self.backlink_block,

@@ -30,6 +30,78 @@ def load_index(index_path: Path) -> dict[str, Any]:
     return json.loads(index_path.read_text(encoding="utf-8"))
 
 
+def _resolve_index_path(index_path: Path, value: str) -> Path:
+    """Resolve absolute or index-relative path entries."""
+    raw = Path(value)
+    if raw.is_absolute():
+        return raw
+    return (index_path.parent / raw).resolve()
+
+
+def _path_key(path: Path) -> str:
+    """Build normalized comparison key for file paths."""
+    return str(path.resolve().as_posix()).casefold()
+
+
+def get_previous_session_context(
+    index_path: Path,
+    current_transcript_path: Path,
+) -> dict[str, Any] | None:
+    """Load context from the most recent session before current transcript.
+
+    Context is sourced from the prior session's summary JSON (if present) and
+    falls back to index metadata when needed.
+    """
+    index = load_index(index_path)
+    sessions = index.get("sessions", [])
+    current_key = _path_key(current_transcript_path)
+
+    for record in reversed(sessions):
+        transcript_value = str(record.get("transcript_file", "")).strip()
+        if not transcript_value:
+            continue
+
+        transcript_path = _resolve_index_path(index_path, transcript_value)
+        if _path_key(transcript_path) == current_key:
+            continue
+
+        summary_payload: dict[str, Any] = {}
+        summary_path = transcript_path.with_suffix(".summary.json")
+        if summary_path.exists():
+            try:
+                summary_payload = json.loads(summary_path.read_text(encoding="utf-8"))
+            except Exception:
+                summary_payload = {}
+
+        context = {
+            "session_title": str(record.get("title", "")).strip(),
+            "session_date": str(record.get("date", "")).strip(),
+            "previously_on": str(summary_payload.get("previously_on", "")).strip(),
+            "last_session_narrative": str(summary_payload.get("last_session_narrative", "")).strip(),
+            "plain_text_summary": str(summary_payload.get("plain_text_summary", "")).strip(),
+            "unresolved_hooks": [str(v) for v in summary_payload.get("unresolved_hooks", [])],
+            "characters": [str(v) for v in summary_payload.get("characters", [])],
+            "locations": [str(v) for v in summary_payload.get("locations", [])],
+            "factions": [str(v) for v in summary_payload.get("factions", [])],
+            "events": [str(v) for v in summary_payload.get("events", [])],
+        }
+
+        if not context["unresolved_hooks"]:
+            # Fallback to global unresolved hooks if per-session hooks unavailable.
+            context["unresolved_hooks"] = [str(v) for v in index.get("unresolved_hooks", [])[:8]]
+
+        if (
+            context["session_title"]
+            or context["previously_on"]
+            or context["last_session_narrative"]
+            or context["plain_text_summary"]
+            or context["unresolved_hooks"]
+        ):
+            return context
+
+    return None
+
+
 def _add_entity(index: dict[str, Any], bucket: str, entity_name: str, session_title: str) -> None:
     """Track entity occurrences by session title."""
     entries = index.setdefault(bucket, {})

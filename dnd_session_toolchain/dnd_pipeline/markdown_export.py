@@ -12,6 +12,7 @@ from .utils import safe_filename
 def render_session_markdown(summary: SessionSummary, transcript_file: str, audio_file: str) -> str:
     """Render a session note in Obsidian-friendly markdown."""
     hook_lines = "\n".join(f"- {item}" for item in summary.unresolved_hooks) or "- None"
+    previously_on = summary.previously_on or "No prior session recap available."
     char_links = " ".join(f"[[{name}]]" for name in summary.characters)
     loc_links = " ".join(f"[[{name}]]" for name in summary.locations)
     fac_links = " ".join(f"[[{name}]]" for name in summary.factions)
@@ -23,6 +24,9 @@ Date: {summary.session_date}
 Transcript: `{transcript_file}`
 Audio: `{audio_file}`
 Generated: {datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")} UTC
+
+## Previously On
+{previously_on}
 
 ## Last Session Narrative
 {summary.last_session_narrative or "No narrative available."}

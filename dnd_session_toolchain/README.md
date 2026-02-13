@@ -105,6 +105,7 @@ python run_pipeline.py prepare-prompt --project-root . --transcript transcripts\
 ```
 By default, this uses `transcripts\session_12.cleaned.txt` if it exists.
 Use `--use-cleaned never` to force the original transcript, or `--use-cleaned always` to require the cleaned file.
+The prompt also automatically includes context from the most recent prior session in `index.json` to produce a "Previously On" recap.
 
 4. Paste `transcripts/session_12.chatgpt_prompt.txt` into chatgpt.com.
 5. Save the returned JSON to `transcripts/session_12.manual.json`.
@@ -139,11 +140,15 @@ python -m unittest discover -s tests -p "test_*.py"
   "factions": ["string"],
   "events": ["string"],
   "unresolved_hooks": ["string"],
+  "previously_on": "string",
   "last_session_narrative": "string",
   "plain_text_summary": "string",
   "backlink_block": "[[Link One]]\\n[[Link Two]]"
 }
 ```
+
+Note: `events[]` are prompted to use tags for better structure:
+`[IN_WORLD]`, `[RULES]`, `[TABLE_TALK]`, `[META]`.
 
 ## Obsidian Import
 

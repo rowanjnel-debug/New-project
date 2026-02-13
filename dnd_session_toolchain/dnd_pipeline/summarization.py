@@ -22,14 +22,26 @@ Required fields:
 - factions: string[]
 - events: string[]
 - unresolved_hooks: string[]
+- previously_on: string (1 short paragraph, recap of prior session)
 - last_session_narrative: string
 - plain_text_summary: string
 - backlink_block: string with Obsidian links like [[Name]]
 
 Rules:
+- The transcript may contain ASR noise, stutters, and fragmented lines.
 - Keep names consistent with transcript wording.
 - Extract only information supported by transcript text.
 - If information is missing, return empty list or concise fallback text.
+- Distinguish in-world play from table/rules/meta conversation.
+
+Field quality rules:
+- previously_on: 1 short paragraph summarizing prior session context only.
+- last_session_narrative: focus on this session's in-world events first. If mostly table/meta talk, state that clearly.
+- plain_text_summary: concise session recap in plain language.
+- events: concise atomic entries. Prefix each with one of:
+  [IN_WORLD], [RULES], [TABLE_TALK], [META]
+- unresolved_hooks: concrete follow-up questions or open decisions.
+- characters/locations/factions: include only confident entities.
 """
 
 
@@ -63,33 +75,104 @@ def _build_backlink_block(summary: SessionSummary) -> str:
     return "\n".join(unique_links)
 
 
-def _build_user_prompt(transcript: str, session_date: str) -> str:
+def _format_previous_context(previous_context: dict[str, object] | None) -> str:
+    """Format prior-session context block for prompt input."""
+    if not previous_context:
+        return ""
+
+    title = str(previous_context.get("session_title", "")).strip()
+    date = str(previous_context.get("session_date", "")).strip()
+    prev_on = str(previous_context.get("previously_on", "")).strip()
+    narrative = str(previous_context.get("last_session_narrative", "")).strip()
+    hooks = [str(v).strip() for v in previous_context.get("unresolved_hooks", []) if str(v).strip()]
+
+    lines = ["Previous session context:"]
+    if title or date:
+        lines.append(f"- prior_session: {title} ({date})".strip())
+    if prev_on:
+        lines.append(f"- previously_on: {prev_on}")
+    elif narrative:
+        lines.append(f"- narrative: {narrative}")
+    if hooks:
+        lines.append("- unresolved_hooks:")
+        for hook in hooks[:8]:
+            lines.append(f"  - {hook}")
+    return "\n".join(lines).strip()
+
+
+def build_previously_on_text(
+    previous_context: dict[str, object] | None,
+    session_date: str,
+) -> str:
+    """Build a default 'previously on' recap text from prior context."""
+    if not previous_context:
+        return ""
+
+    direct = str(previous_context.get("previously_on", "")).strip()
+    if direct:
+        return direct
+
+    title = str(previous_context.get("session_title", "")).strip()
+    date = str(previous_context.get("session_date", "")).strip()
+    narrative = str(previous_context.get("last_session_narrative", "")).strip()
+    if narrative:
+        return narrative
+
+    summary = str(previous_context.get("plain_text_summary", "")).strip()
+    if summary:
+        return summary
+
+    hooks = [str(v).strip() for v in previous_context.get("unresolved_hooks", []) if str(v).strip()]
+    if hooks:
+        top_hooks = "; ".join(hooks[:3])
+        return f"Previously on {title or 'the campaign'} ({date or session_date}): unresolved hooks included {top_hooks}."
+
+    return f"Previously on {title or 'the campaign'} ({date or session_date})."
+
+
+def _build_user_prompt(
+    transcript: str,
+    session_date: str,
+    previous_context: dict[str, object] | None = None,
+) -> str:
     """Create user prompt for model inference."""
+    previous_block = _format_previous_context(previous_context)
+    previous_part = f"{previous_block}\n\n" if previous_block else ""
     return (
         f"Session date: {session_date}\n\n"
+        f"{previous_part}"
         "Transcript:\n"
         f"{transcript}\n\n"
         "Generate structured campaign notes as specified."
     )
 
 
-def build_manual_chatgpt_prompt(transcript: str, session_date: str) -> str:
+def build_manual_chatgpt_prompt(
+    transcript: str,
+    session_date: str,
+    previous_context: dict[str, object] | None = None,
+) -> str:
     """Build a copy/paste prompt for manual use on chatgpt.com."""
     return (
         f"{SYSTEM_PROMPT}\n\n"
         "Return only JSON. Do not include markdown fences.\n\n"
-        f"{_build_user_prompt(transcript, session_date)}\n"
+        f"{_build_user_prompt(transcript, session_date, previous_context)}\n"
     )
 
 
-def _summarize_with_ollama(transcript: str, session_date: str, config: ModelConfig) -> str:
+def _summarize_with_ollama(
+    transcript: str,
+    session_date: str,
+    config: ModelConfig,
+    previous_context: dict[str, object] | None = None,
+) -> str:
     """Run summarization against a local Ollama model."""
     import requests
 
     payload = {
         "model": config.model,
         "stream": False,
-        "prompt": f"{SYSTEM_PROMPT}\n\n{_build_user_prompt(transcript, session_date)}",
+        "prompt": f"{SYSTEM_PROMPT}\n\n{_build_user_prompt(transcript, session_date, previous_context)}",
         "options": {"temperature": config.temperature},
     }
     response = requests.post(
@@ -102,7 +185,12 @@ def _summarize_with_ollama(transcript: str, session_date: str, config: ModelConf
     return str(body.get("response", "")).strip()
 
 
-def _summarize_with_openai_compatible(transcript: str, session_date: str, config: ModelConfig) -> str:
+def _summarize_with_openai_compatible(
+    transcript: str,
+    session_date: str,
+    config: ModelConfig,
+    previous_context: dict[str, object] | None = None,
+) -> str:
     """Run summarization against an OpenAI-compatible chat endpoint."""
     import requests
 
@@ -115,7 +203,7 @@ def _summarize_with_openai_compatible(transcript: str, session_date: str, config
         "max_tokens": config.max_tokens,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": _build_user_prompt(transcript, session_date)},
+            {"role": "user", "content": _build_user_prompt(transcript, session_date, previous_context)},
         ],
         "response_format": {"type": "json_object"},
     }
@@ -133,7 +221,11 @@ def _summarize_with_openai_compatible(transcript: str, session_date: str, config
     return str(body["choices"][0]["message"]["content"]).strip()
 
 
-def _heuristic_fallback(transcript: str, session_date: str) -> SessionSummary:
+def _heuristic_fallback(
+    transcript: str,
+    session_date: str,
+    previous_context: dict[str, object] | None = None,
+) -> SessionSummary:
     """Create an offline summary when no model endpoint is available."""
     lines = [line.strip() for line in transcript.splitlines() if line.strip()]
     plain = " ".join(lines[:8])[:1200]
@@ -155,6 +247,7 @@ def _heuristic_fallback(transcript: str, session_date: str) -> SessionSummary:
         factions=[],
         events=events,
         unresolved_hooks=["Review full transcript for unresolved hooks."],
+        previously_on=build_previously_on_text(previous_context, session_date),
         last_session_narrative=plain or "No narrative extracted from transcript.",
         plain_text_summary=plain or "No summary extracted from transcript.",
     ).normalize()
@@ -162,28 +255,35 @@ def _heuristic_fallback(transcript: str, session_date: str) -> SessionSummary:
     return summary
 
 
-def summarize_transcript(transcript: str, session_date: str, config: ModelConfig) -> SessionSummary:
+def summarize_transcript(
+    transcript: str,
+    session_date: str,
+    config: ModelConfig,
+    previous_context: dict[str, object] | None = None,
+) -> SessionSummary:
     """Generate structured summary from transcript using configured provider."""
     provider = config.provider.strip().lower()
 
     try:
         if provider == "ollama":
-            raw = _summarize_with_ollama(transcript, session_date, config)
+            raw = _summarize_with_ollama(transcript, session_date, config, previous_context)
         elif provider in {"openai", "openai_compatible"}:
-            raw = _summarize_with_openai_compatible(transcript, session_date, config)
+            raw = _summarize_with_openai_compatible(transcript, session_date, config, previous_context)
         elif provider in {"heuristic", "offline"}:
-            return _heuristic_fallback(transcript, session_date)
+            return _heuristic_fallback(transcript, session_date, previous_context)
         else:
             raise ValueError(f"Unsupported provider '{config.provider}'.")
 
         payload = json.loads(_extract_json_blob(raw))
         summary = SessionSummary.from_payload(payload)
+        if not summary.previously_on:
+            summary.previously_on = build_previously_on_text(previous_context, session_date)
         if not summary.backlink_block:
             summary.backlink_block = _build_backlink_block(summary)
         return summary.normalize()
     except Exception:
         # Keep the tool runnable even if model server is unavailable.
-        return _heuristic_fallback(transcript, session_date)
+        return _heuristic_fallback(transcript, session_date, previous_context)
 
 
 def write_summary_json(summary: SessionSummary, summary_json_path: Path) -> None:
