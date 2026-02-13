@@ -1,0 +1,1297 @@
+You are a D&D campaign archivist.
+Return ONLY valid JSON.
+
+Required fields:
+- session_title: string
+- session_date: YYYY-MM-DD string
+- characters: string[]
+- locations: string[]
+- factions: string[]
+- events: string[]
+- unresolved_hooks: string[]
+- previously_on: string (1 short paragraph, recap of prior session)
+- last_session_narrative: string
+- plain_text_summary: string
+- backlink_block: string with Obsidian links like [[Name]]
+
+Rules:
+- The transcript may contain ASR noise, stutters, and fragmented lines.
+- Keep names consistent with transcript wording.
+- Extract only information supported by transcript text.
+- If information is missing, return empty list or concise fallback text.
+- Distinguish in-world play from table/rules/meta conversation.
+- Maintain continuity with prior context in this prompt and prior messages in the same chat thread.
+
+Field quality rules:
+- previously_on: 1 short paragraph summarizing prior session context only.
+- last_session_narrative: focus on this session's in-world events first. If mostly table/meta talk, state that clearly.
+- plain_text_summary: concise session recap in plain language.
+- events: concise atomic entries. Prefix each with one of:
+  [IN_WORLD], [RULES], [TABLE_TALK], [META]
+- unresolved_hooks: concrete follow-up questions or open decisions.
+- characters/locations/factions: include only confident entities.
+
+
+If you are in an ongoing chat thread, treat prior assistant outputs as canonical campaign memory unless corrected.
+
+Return only JSON. Do not include markdown fences.
+
+Session date: 2026-02-14
+
+Previous session context:
+- prior_session: Rules Talk: Fabricate, Materials, Devils, and Worldbuilding (2026-02-13)
+- narrative: The session was largely out-of-character discussion about rules, materials, and setting design. The group debated how creation effects work (what counts as raw material, whether metal can be transmuted into an object of equal value, and whether that feels like cheating). They also brainstormed how devils and arch devils might be governed by contracts and rules, and acknowledged ongoing uncertainty about fitting certain classes (notably paladins) into a storyline originally written without full system knowledge. A chunk of time was spent on worldbuilding about shifting power toward trade guilds, limiting wizard influence, and anticipating wizard backlash, along with meta-talk about recording/transcribing sessions and training a model to separate game content from unrelated conversation.
+- unresolved_hooks: How devils/arch devils contracts and rules function in this campaign context.; How paladins are intended to work in the storyline.; What the plan is for the remaining three fabricates and what keep trying to devils means in-game.; Whether the discussed metal equal to the worth of the object approach is allowed or will be ruled against.; How the setting's trade-guild power shift and wizard restrictions play out, and how wizards will respond.
+
+Campaign memory context: historical_sessions=2
+- recent_sessions: Example Session Title (2026-02-13) | Rules Talk: Fabricate, Materials, Devils, and Worldbuilding (2026-02-13)
+- known_characters: Player 1 Character, Player 2 Character, Player 3 Character
+- known_locations: Ruined Watchtower, Eastern Road
+- known_factions: Known Regional Faction, devils, arch devils, wizards, the guilds, guilds of the trade
+- known_events: Watchtower Investigation, Route Planning, Discussed whether an ability/ritual requires raw materials and what counts as valid materials (e...., Described a process where you lay out metal equal to the worth of the object and turn that metal..., Talked about devils/arch devils and how their contracts and rules work; compared them to gods., One speaker stated they still have three fabricates remaining and intends to keep trying somethin..., Discussed difficulty of adapting D&D mechanics (including paladins) to fit a prewritten storyline..., Shared background worldbuilding: an entity/government for one century, shifting power to trade gu..., Talked about recording/transcribing sessions and that mixing game talk with real-world talk would...
+- campaign_open_hooks: Who was at the tower before the party arrived?; Why is the faction linked to the watchtower markings?; What threat is expected along the eastern road?; How devils/arch devils contracts and rules function in this campaign context.; How paladins are intended to work in the storyline.; What the plan is for the remaining three fabricates and what keep trying to devils means in-game.; Whether the discussed metal equal to the worth of the object approach is allowed or will be ruled against.; How the setting's trade-guild power shift and wizard restrictions play out, and how wizards will respond.
+
+Transcript:
+I'm recording.
+What?
+Edward?
+It is low, it is it.
+Yeah.
+It is live.
+The boss is now transcribing more whatever it is.
+It's transcribing.
+Yeah.
+It's picking up the OBS, like it's supposed to.
+I was just going to throw a file, but no, if it's picking it up, that's cool.
+We shall give it one last test for it to try out.
+The most dramatic news.
+You're really challenging it.
+I think my accent's also challenging it.
+Well, I knew it.
+I knew it.
+Yeah.
+Yeah.
+Yeah.
+I did this new hairlag moelag.
+Now I think it's okay.
+Yeah.
+Yeah.
+Now I think it's okay.
+I think it's okay.
+I think it's okay.
+Yeah.
+Oh my gosh.
+You guys are going to confuse them.
+Yeah.
+Yeah.
+Well, we're so less tested.
+Well, I'm not going to have my stress tested.
+I'm going to get so many sections where it's like,
+was unable to translate this.
+And was unable to transcribe this.
+It just starts speaking in a different language.
+Right.
+So we're at the part where you guys are free of Dave,
+the prison and person and God of contradictions
+and the space between spaces and things that could have been.
+You finally escape or survived him
+and got him on to your team.
+Right.
+He's full on team.
+Kings are assembly now.
+He's given you the keys
+to becoming the protectors or dislodging the island
+as long as you guys make sure that the prison is real fun.
+And somewhere else.
+Basically, the world is your oyster.
+The 30 of miles being trapped in this space between spaces.
+But not connected to the link.
+There's a lot you guys can do.
+No, this is our oyster and the other miles is the pearl or something.
+Yeah.
+It escapes the realm of Dave.
+We found ourselves immediately ambushed upon our airship.
+By a bunch of Star Spawn.
+It's siege weapons who got good.
+We are previously the left-right incentive in very little
+that they've been able to do to us.
+But now they have suddenly got quite competent.
+This is a mildly concerning development.
+We never left quite the floor with it.
+Upon arriving back in Paradise, we have been helping to.
+We have arrived at Paradise in Paradise in Paradise
+of the future.
+From the beginning to Star Spawn.
+And in flux of refugees from all over the place.
+These reasons.
+Swacking to the one tower, which has a lot of cave.
+We have low stocks of food.
+Quite little food income.
+And morale is quite low.
+As the Star Spawn have been reflecting heavy losses
+and they seem unstoppable.
+However, we have locally stopped them.
+We have thwarted them several times.
+And we're in better.
+We have been able to hijack their network of teleportation meatballs.
+So after a little bit of reassuring the townsfolk that we are here,
+we will make everything better.
+We called a meeting with the heads of all of the
+different, important, influential organisations in Paradise.
+That is where we should start today's session.
+Robert, take it over.
+Right.
+So you sat down at the meeting.
+If I'm not mistaken.
+Right?
+Yes.
+There are no chairs.
+Yeah.
+There's not chairs that can contain crates.
+But the rest of you sat down.
+I think about who sits inside of crates.
+I have my own crate.
+Yeah.
+Or my own hijack.
+Yeah, you have your permanent own seat.
+I'm surprised.
+I'm surprised she's not overweight yet.
+With the lack of exercise.
+She's also in phase.
+Yeah.
+She's got that very metabolism.
+And he was...
+I've received your fat fairy.
+Yeah, that's true.
+The mayor was posing to you a bunch of problems.
+That's...
+You guys needed to try and sort out.
+Can you remember what those problems are?
+A big one was the lack of food.
+Yes.
+I remember Tony being asked for something.
+I think the blacksmith needed...
+Help something.
+You can get exactly what he needed to help.
+You see, this is why the system will help so much.
+Because I can't find where the girl is going to die.
+I think he needed to...
+Wasn't it something about determining the...
+Like some... like maybe...
+The weapons for defenses or something?
+But you need to defend paradise.
+Yes, we'll repeat it the time.
+Basically it was getting...
+Getting a paradise back to...
+Being paradise.
+It was defense.
+Food.
+The population outside.
+A ship.
+A bomb table.
+Yes.
+There was also a machine ship.
+The train to ditch.
+Can need it to help with...
+I remember...
+I remember me saying that we should probably not have...
+...skin attempt at needing a loan.
+Because he would probably...
+...this solution would be used more gunpowder.
+There's a blur, everything up.
+We need some great solution.
+I can't.
+No, no, no, no, no.
+Uh, beats with the... the time to blacksmiths.
+He needs to talk to me.
+Yes, I remember it had to do with something to do with defense.
+I don't know how much helping him.
+There was...
+Or a plan to...
+Like making sure we have enough weapons.
+There'll be him.
+Oh, yes.
+There... you have lots of... of refugees that you guys can put to work,
+but they don't have enough weapons.
+And weapon production has slowed down...
+...with...
+...the...
+...oh, you haven't found out why.
+It's slowed down yet.
+Yes.
+Yeah, I guess that that was...
+There was something to do with the slowdown of...
+Yeah, he needed... I think he just said he...
+...he needed Tony's opinion.
+Yeah.
+Like with...
+...with regards to something related to forging.
+Just had requested my help with...
+...or Tony's help.
+All right, so...
+I can't remember the specific...
+...problems...
+...that...
+...I don't for you.
+I think I know what happened to my notes.
+I think my girlfriend's been using them to stick a gun in them...
+...fighters.
+I'm gonna fight.
+I'm gonna fight.
+They're just disgusting.
+There is disgusting his gun between these pages.
+How many of these has she done this to?
+What's in the absolute fuck?
+They look like scrap pieces.
+They look like scrap pieces of paper.
+I'll be... I'll admit, I'm not the neatest person.
+There's just papers all over this desk, and then I guess she's...
+...todys him up and doesn't know what is important and what is not.
+It was all in a nice little, like...
+...example...
+...that fuck puts the gun in random pieces of paper.
+Someone is still easy to put in the bin, I guess.
+Yeah, if you want to throw away your gun...
+...random piece of paper works.
+Doesn't matter.
+All right.
+If you leave the piece of paper lying around, it's revolting.
+Doesn't matter. The big issues here are...
+...the population outside, growing, not safe.
+They want to improve defenses, right?
+And they want to outfit people with weapons.
+They want to find out where the hell this other ship has gone,
+...because it's just like...
+...maid your...
+...maid your navy, now a weeker.
+And...
+...just general, like, lowlessness...
+...and things going on in the town, as well...
+...with all the people who have come in.
+Yeah, and I do remember...
+...you mentioned earlier, but I'm saying...
+...like we need to make sure...
+...we have a lot of refugees in there.
+We should make sure we utilize the extra hands.
+They can't just be outside.
+Well, the mayor locked the gate.
+He locked the gates, because too many people were coming in.
+And now, there's a bit of...
+...and haven't been assigned work to do yet.
+Yeah, everyone's a bit aimless and a bit...
+...fused on the way to go.
+I remember we got a hint...
+...that the forces of...
+...of the one who should not be named...
+...are sort of massing in Odeo-Mite...
+...or the ruins of Odeo-Mite.
+That's also the direction that the other things came from.
+Odeo-Mite, of course, is the town...
+...the city.
+It used to be inhabited by the parents of Odeo-Mite.
+People before the start.
+Who were crucially invaded?
+Who were corrupted?
+They corrupted some of their priests into the cult...
+...that they didn't know that they were worshiping the chained one.
+So...
+...what would you guys do?
+There's two forms of...
+...that they should not be named...
+...it's the same thing.
+I don't have the specific things that I told you guys to do...
+...but I do have the general problems written out.
+So...
+...what would you like to handle first?
+Well, the leader we're going to...
+...have them all come to us.
+Yeah.
+Oh, yes, yes.
+You want them to...
+...you're going to send people out to go and fetch them...
+...to come talk to you so you don't have to go to them.
+Yeah, I could go to fetch them.
+Yeah.
+And also...
+...the group reason is that...
+...that we don't split the party.
+Yeah, okay.
+All right.
+All right.
+The brains of great fetching them...
+...is that they also have transport.
+That is true.
+All right.
+It does great go and fetch them.
+Yeah.
+Great will go and fetch them.
+Great is very insistent.
+Who do you fetch first?
+Are you going to fetch the gate guard?
+The construction guy who's in charge of the gate.
+Are you going to call the blacksmith?
+Are you going to call the head of the...
+...foundry master first?
+The form is.
+All right.
+The foundry master first.
+On account of he's probably doing something.
+Can't actually be instantaneously shot down.
+Yeah.
+Like he doesn't want to come with you.
+And he's like kind of like annoyed.
+That you are telling him to...
+...to go.
+He's...
+...I don't have his character but I'm pretty sure he was an Indian dwarf.
+Yeah.
+Yes.
+And he was related to the guys at the mines.
+I remember now.
+And he says...
+Yeah.
+Can't you say I'm busy with some very important work?
+That is what Tony's business to write.
+So you expect me just to...
+They will be a needy.
+Drop everything at the time busy doing.
+Yes.
+Oh, it's more like...
+...or delicate.
+He's...
+He's like mumbling under his bed like...
+...but if there was fucking...
+...do this to me I just...
+...do this to do that.
+Tell me what to do and then I have to do it.
+And then I have to leave these to close.
+And he's like complaining as he...
+...as he then in between his complaints.
+Like tells the...
+...the assistants to take over what he's doing.
+And starts walking with you.
+Still grumbling.
+I'll take him up and walk fast.
+He is like...
+...trashy.
+It is like...
+...you can't do this to me just because I'm my buff.
+You think you can pick me up?
+This is the ultimate assault spect...
+...and he's like just going...
+...you're capable of picking up almost anyone.
+You might...
+You might.
+Oh, my god.
+I'm sorry this would make some sense.
+But...
+...but at the time...
+...it's kinda literally kick up anyone.
+But at the time...
+...he reaches...
+...you guys with crate.
+He looks very flustered and rad in the face.
+Oh no.
+I'm going straight to the next person.
+Oh no!
+You can't...
+...be where his team is from.
+...I'll play with him...
+...and be one.
+I'll be one.
+I think it would be Harbourmaster. Oh no, do Harbourmaster last. Go farmer, wall, and then back to Harbourmaster and then back to
+to. Yeah, so yeah, so you show up to the Master farmer, is looking towards and loudly declare that
+he is being summoned to a meeting. He says oh no problem Harbourmaster. Let me get some snacks. What are you guys? What are you guys?
+So then you go. Good Barry is pressed towards him as I am starting off towards the next. So you
+start off towards the wall and you see the Master charge of building and who's been put in charge
+of the wall is just busy directing some people, trying to make some repairs and he sees you and he says
+Master crate. I've been meeting you, speak with you and the rest. Hey. You guys your chance for
+I will pick him up with the other hand. What's me? He looks at the other. He looks at the others.
+There are also picked up and he's like, he's like, Harry on. He's like, is there is there any use in fighting this
+and the the farmer says he didn't even let me get snacks and the
+and the the the the the door of the Master. He's used a good Barry. As far as quite a certain that it's sufficient snacks for a day.
+The the door of the Master's got me to the point of inventing swear words and
+and speaking in tellers almost and so then you you start hitting back down towards the Harbour Master
+and he's he's inside the Harbour Master building and he's busy looking at maps and talking to
+to some of the other captains that are still around and he sees he sees you carrying those people and he
+like he's like a bit confused and he says he says he will be called to a meeting. He had to facilitate
+transport to take you up. Oh okay can I get shotgun? He's picked up and I don't have to go.
+So you carry them to the meeting at the mayor's house and you sit around the table and
+and very rapidly I might have at 70 feet per round navigating expertly through crowds and everything
+and jumping over buildings where that is a shortcut it is not a gentle ride but it is fast.
+Great for for a good measure get long strider. Yeah excellent.
+So you guys sit down at the at the famous table and there is a chair that has been
+set aside and that was the one that you guys put a spell on and it's kind of like
+set to the side and it's got a little sign on it that says do not touch and that's the chair that you guys
+kept putting a lutz on for the previous mayor. The one you tormented him with every morning in the
+early morning when he set down for his breakfast and gave him updates.
+Less so. We are at a danger. That's great from mental security.
+Something a little bit more severe.
+Let's a record to reflect that we are very confident. So one of them start talking at the same time
+sort of like asking like what's the meaning of this I've got work to get back to and things like that and
+bell presses the organ button. They all promptly shut up. Well two of them are holding their ears
+and just look at you as wide open eyes like what are you doing now we're starting to meet you.
+We have what you all hear to discuss the our strategy for the upcoming few days leading
+into the next few months. In order for you to be able to fulfill your duties here in paradise
+in the most effective and strategically targeted manner possible. We have didn't it appropriate
+that you should be informed as to the intelligence that has been uncovered over the course of the
+past week or so that we have been gone and great will proceed to report the top level over
+view of the events that have transpired since we left paradise. We will issue copies of the data
+packets and the pictures of the the the the start one that we have taken to brief people on what
+threats we are up against. We will explain that we believe that we had sealed a trade lines
+with groucher as well as assisted in their defense however their current status is unknown to us.
+Be very valuable if they are still alive and we can continue that trade lines. A large number of citizens
+of the early mobiles had been taken to Arena Custer which was a underground temple where the
+start form would do in some sort of a weird ritual which we promptly shut down. There are of course
+pictures of the apparent aberration that was charged with all of that. Do you share the exercise
+what we are up against? Do you share the purple there in the farmer the gruesome pictures? Yes.
+We we don't give a shit. Okay after all of this all of them look a bit bewildered almost
+sick. Yeah like to them the very pale especially the specifically the
+the builder and the farmer look extremely pale and they all look like they're having a bit of
+an existential crisis as there's a moment of silence as you finish your deluge of of information just
+dumped on them and the first one to speak is the farmer and he says it's but will we be able to
+plant crop still it's is there a sun cycle is there and the the forge master turns him and he's like
+of course there is you idiot look there's been day and night so stop your nonsense there are more
+pressing matters at hand what are we going to do about this there are multiple dimensions that the
+power response must take and first of all it is imperative that we ensure that the majority of the
+population has many as we can can be protected and fed kept alive to form a productive society
+both for the sake of generating power and also for what comes after the war gentlemen our future is
+very bright if we can make it through this for the options for having a single stroke team
+before operations that will resolve this situation in a more permanent fashion will also grant us
+civilization defining powerful magic abilities as a civilization this is this is all really good
+but what does that mean for the captains in our if these no oceans connected to our ocean
+but it means is that we will rely more dominantly upon airships but that is something that is glory that will
+happen later on first we must earn that and for now the ships are still very valuable in our original
+objective of controlling the ocean miles and they will remain so the builder has been quite a bit
+looks and says there is no reason to dwell on things in the future or the past we need to fix
+what's the problems right now and right now people are coming through the holes in the walls
+yeah we do not have enough food to feed them we must expand capacity it has been very dangerous
+to man the farms outside of the city's reach where some of the larger farms were
+there were wants to live there any longer and make them safe yes yes so I have a little idea there
+he grabs out of his pocket like a few napkins that have like very very cool like
+but would be blueprints like a napkins yeah and they all appear to be and they're all farm
+weapon hybrids
+like plow is and war sites and you know I'm shovel guns yeah so I was always told that
+you need to make use of what you have right and this is very much seems to me one of these two birds
+one stone situations this looks very interesting we can sort of make if we you know with a little bit
+of creative forging and creative fighting you can use your your farming implements to defend yourself
+very well this could work if we could convince some of the people to go to the farms they would need
+protection but there is a problem we are running out of iron if we could reuse the iron from all
+of the tools that people have brought from the farms yet that's another thing where first of all yeah
+you only need to make you just have to make farming tools you know if you use them as weapons then you don't
+need you don't need to to make swords and pitchforks you know what is a pitchfork it's not a three
+I like the way it's also a lot easier to to train like an apprentice to make a pitchfork
+you can just make a pitch if you just just teach him to make that one thing many times many farmers use
+their tools as weapons as we could we could sell it to them as an upgrade yes and if they pay
+in gold and silver I believe Tony is capable of finding ways of turning that into more metal to use
+this is fantastic we could sell them on the promise that they could have the weapons they need to
+defend their farms and if if we promise to to fend off the the invaders from the area the
+farmers are shorter return and we're sure to reclaim the fluid that we lost I mean it's all out there
+even more than that I am capable of dramatically boosting the production the agricultural output
+of an area with magic that could form a pleasant incentive to accept some degree of responsibility
+for the defense I am referring to the spell plant growth which the spell channels vitality into
+plant all look plants in it so if I cast it over a duration of eight hours I can enrich the land of all plants
+in a half mile radius sent a lot of point within range become enriched for one year the plants
+yield twice the normal amount of food when harvest it that is that is perfect
+then we could use that definitely this could save us at the short term and sending people out to reclaim
+their farms and bring back food we I don't know if they have lots of money to pay for the upgrades
+but if we could say that we will upgrade their weapons if they bring us the food help them reclaim their
+farms by fighting of the invading force and it starts like thinking to himself and doing some
+calculations so he's coming to the conclusion that he thinks it would be best if you upgraded the
+farmers weapons but also then as part of the instead of paying they just have to come fight for you
+and they have to also provide them there is their food for your army yes we will put together an incentive
+package including citizenship provision of tools and a job for anybody who signs on to lend their
+labor in the defence of paradise the defence and supply of paradise and we can finally get all the
+farmers we can finally get all the farmers on the same team we might even start a
+union let's not go too much we are in the middle of war and orders are orders but afterwards yes
+you can even ask all you want right now we are under pirate law and pirate law that takes low
+unionizing and no disobeying of commands during a battle we are in a battle we are in a battle for
+the survival not just of our own civilization but of all civilization so we should tax the living
+shit out of them after we're done after we're done we can do a lot of taxing for now people who
+wish to enjoy citizenship of paradise with all of the protection and support
+should be signing up for work details I was thinking of taxing the entire world
+yes we will tax the rest of the world to subsidise the citizens of paradise after the war is over yes
+yeah so that we're on the same page here okay that will solve the problem for
+part of the iron that would need to outfit an army to fight all of another army but what size of
+force are we looking at the outfitting however many survivors are outside the gates we will need to
+be in contact with my brothers again we need to send somebody over there but nobody has been
+willing we shall do so I'm sure if we can get the iron stores that they have collected
+we might be able to make some basic weaponry but I will need some more hands at the foot there are
+many hands can't outside the gates we will can they be taught we will search for some
+people who show is strong aptitude very good I just wanted to say none of this is gonna matter
+if we get attacked before this rule is the way we want it also true to an extent
+we do require fortifications not exclusively around paradise itself there will be considerable
+amounts of work to be done building fortifications even after the fortifications directly around paradise
+and complete we want to fortify the mind more and we will want to fortify strong point to help
+go out the farms additionally as we have briefed you the star spawn make use of teleportation
+meteors the meteors that you saw fall it falling from the sky during that faithful night
+they actually form a network of teleportation beacons that can be teleported to
+rather between by the star spawn and by us if we acquire teleportation enabling items
+these are mostly found on the star spawn they are very valuable
+star spawn leaders carry such keys any such key enables the use of these teleportation meteors
+one teleportation meteor is located a short way away from paradise
+when we came through there we found a star spawn force assembling
+intending to attack paradise we dispatched it and we took their teleportation keys
+that does not mean that there will not be more coming from there and it would be hovers to fortify
+the absolute ever-living shit out of that and turn it into a kill box
+if any star spawn decides to try and come attack us the easy way through their teleportation network
+they should find out that that gets me killed very fast
+we saw some beetles falling to the surface well do you know precisely here
+and you may be bringing us to that to the government
+towards order love and the castle of control both our locations where we
+encountered and fought star spawn the castle of cool third is now a ruin there was a giant all above
+scary energy above it however the star spawn that we're hiding in the castle of the castle
+who thought were dispatched at their temple there was destroyed you know so that that portal you
+guys messed up their ritual a little bit and it kind of backfired so that portal doesn't work any more
+but the one the question to allow you guys to have information about yes we must preserve that most of the
+major cities on Odeon do in fact have a teleportation meteor inside them we may yet be
+able to use this to our advantage but that remains to be seen how about a black water if we need a wood
+whatever the walls oh we haven't heard any contact from black water but that would be ideal
+maybe getting maybe getting that ship back would also be nice if anything it can help
+we attracted hitting south out of the bay and then it hit it east we're not sure after it hit it
+out east we went after that but I don't think it went very far because we had some people come back
+I don't see this a drop off the ocean just ends it was confirmed when refugees arrived
+who experienced the same thing do we know if there are still sea lanes possible
+quafond open insular and the portal price it portal praser it seems that these
+I circle around the island about a hundred miles before we cut off all the way around
+right so serpent navigation of the island remains possible does it the as far as intelligence is confirmed
+that is at least positive news as the premier navy we still have naval superiority around it
+it is very important that we ensure that the missing ship is returned ideally with as much of
+its crew as we can possibly manage and the navy will allow us to project expeditions to other locations
+either for gathering resources and food or for projecting power do we have a means of tracking the missing
+ship well the original tracking of the ship was just sightings from other ships that were returning
+so no we don't but we've gotten far not me places to land this side otherwise so it's still
+be sailing actually airship to pursue it although you might have been possible do we know who is
+commanding it who is aboard it and anybody who might still be loyal on board it
+it's the twins the twin captains full of shit those two but always do there were in support
+no that's fine well we don't ever way of tracking them but we've been doing some interviewing
+and some intelligence gathering thanks to lady by spinewasters training we've been able to
+learn a little bit about information gathering so after some busted it we found out that the
+twin brothers had a fancy for a lady in black water they both had the same name and they're eye on the
+same name as well as I know it's the biggest cause of drama between the two of them
+I was I was I was you you you you you meet you meet some very interesting characters in black
+water um and uh yeah back to remember several of them but the ones I could remember are all
+me tiny has a sister yes he's got a whole family but yeah tiny had a sister there was also the
+old lady in the hut there was also as a gave you that nice prediction that you guys were going to be
+surrounded by death in destruction I mean she wasn't wrong yeah my emotionally that was
+essential there I guess that sort of what happens when you point cannons in every direction
+by the way if you want to know where the twins are I can describe and describe them yeah the whole
+shit Tony right okay get Tony whatever the fuck Tony needs yeah and we will we will
+get this whole spine that work I need a hope I need an orb to ponder
+the idea that his orb is just a big ball still there's a very shiny
+I can arrange that he has a head shaped head sized metal ball that he uses for shaping
+um helmet on the so the man the man since someone it needs to be like a basically needs to be like a
+thousand G key words oh geez oh yeah it is oh geez okay so a really really shiny
+myth of all of silver this is a crystal ball a silver mirror or something still with holy water I like
+the idea this is a very shiny the assistant comes back from the the market shop owner the
+shop owner the one that you guys stole from and uh and uh and uh and uh and uh and uh and uh
+those don't know taking out back then he comes and he says and who will be
+illuminating me for this or is it an a rented basis I believe the term is requisition
+pre-concession requisition is this an autocracy yes we are at war you might notice and uh
+told me he is currently the commander in chief oh I will take it as an eye on you
+yes we definitely owe you one ball back yeah he he he he gives a tea guys and uh he he he he he walks of
+tough to themself thinking that uh the king's who could simply host the miffever and uh but you have
+your your steel ball what hold on I believe Tony said silver sorry you're silver when it should be a
+thousand G it's a thousand Gp uh decorative ornament uh that is basically it's basically a sphere mirror
+for a really rich person's house it's an artistic installation so yes if it's made of solid silver it
+also weighs 200 pounds he brought it in a trunny you rolled it it's a sphere oh yeah yeah yeah he's just
+you're all f**k you rolled it while it's covered in things to keep it's shine um so yeah you you
+some you're scrounger it's one of those it's in one of those you know the um you have them in
+some like public places you have the the fountains that are big stone ball that like because it's a water
+because there's water you can like turn it yes you've never seen yes yes yes that layer of water
+you're looking for a huge inch yes yeah so you can actually get like a rotator yes I love that I got my
+finger piece from one of those balls before how was little I used to do stupid things around
+with my head impulse control issues yeah yeah I I I I got my hand trapped in uh the the the the
+the robot I forgot the name meaning this uh the thing you have before uh before a cash register that the
+oh the computer I got my hand trapped in one of those well it's only didn't get his hand stuck
+in this beautiful ball and how does it work 20 what do we have do we have a possession of this
+of one of the the twins um working sin for them to get to yeah I'm sure we do we we've confiscated
+everything they live behind in their room to look for evidence oh we can't wait wait wait we go
+we go let's see if we can collect a hair or something if we have a hair they have to make a
+a wisdom save well if we have something that they own if we have a look of hair a bit of a male
+or the like it's a minus 10 yeah on there they're a wisdom save bonus so it's going full
+telegram matter oh I'm going to have so many systems for this meeting so I'm a sender
+another assistant now to go to get this evidence uh he calls one of the assistants and tells them to
+call more assistants and uh and then since one of the other assistants to go and fetch the evidence that
+these guys are collected um they've they've got a very crude evidence collecting syrina taught them
+basics of collecting information from from scenes of crimes or weapon things happened she's been
+improving their methods but they still just have everything in a box and uh after shots
+time they return with the with the box and in the meantime whilst they're off while they're with
+do we have um it means of contacting them by it means of sending to the twins yes i assume
+they did not take any like send of the sending stones that you guys usually use um with them
+and uh they don't have to only have sending prepared by chance they don't have one of those scrolls or
+they ship one of your community business rules there's only have the ability to cast sending
+booch hands fast it excellent but not don't have it prepared but i don't have i don't have
+sky i also don't have sky and prepared but i see Tony needs a nap yeah this is this is this is
+preparations for tomorrow's manipulator yeah okay so maybe we should do that we should
+clear the mind first so that can get going is that we'll take some time there that too yeah
+something really stupid i would like to suggest also is that even though we can just describe them it would
+be funny to go to blackwater to abduct their uh that they're female yeah it would be funny because
+we didn't really disrespectful to what's called chief justice Tony uh this right chief justice tiny
+you don't just go kidnapping the chief justice is sister do you we hold hostage you're
+holding home she's probably oh no no yeah i i'm putting a great so she is great to go
+just they don't know that right yeah something we could also do is we could scribe on them
+as as they're doing whatever they're doing and Tony can just send to them look i'm watching you right now
+in your yellow jacket or whatever it is with your approximately three days of bed
+sailing off to go romance tiny sister i suggest you turn back before we start deploying the actual
+force to break you back yeah you can come back but the power of sail or the power of crates
+you're gonna you can sail back will be towed back the thing also is that we can
+grow the we just get there so fucking boy put our sail in here yes i can turn it to a cracker
+oh you fuck i can't but they don't know it's not a cracker
+or sky cracker so you can't fly so during this time during this time
+so in a serena returns from her little information gathering and checking middle her
+people under her department were doing what they needed to do and when she comes back she over here
+you guys talking about about the black water situation and the in the mine situation
+and she looks at you guys and she goes um um did you guys forget that we sent tv and
+dursk to the mine oh what's this about tiny sister the twins
+well you're uh oh what we call you are agents apparently the way we have the house for
+time sister yeah yeah we've known this for a long time what about it
+twins so are a charge of hey the the business ship oh of course it was a sailing
+sailing sailing I like that I think that's definitely where they were stopping but from what i've been
+hearing strange things have been going on there uh yeah there's a lot of the the refugees have
+been coming through and um it seems when we were moved that um that a lot of strange creatures
+and things have started appearing it seems they didn't just come across alone I don't know if this
+is a problem yet because i did get some reports of star spawned being ripped to shreds by
+some strange creature people have not seen it for so good news is these creatures are not on their side
+and do we have any uh the description the descriptions of these creatures um very
+even of eyewitness apparent eyewitness accounts of the same creature differed completely
+um we've heard of creatures up in the mountains to the north uh in the mountains in the
+forests uh that people have not been returning from blackwater um they before all the refugees started
+showing up when things started going wrong at first when you left for eyewitness we were investigating it
+and um we had no headway as most of the agents we sent did not return it is around that
+time that the the the wood shipments stop coming through as well as that is what i can assume either it
+is compromised by some kind of creature or some kind of star spawn invasion we do not have enough
+information we were apparently sending out the twins to go and check on it when all of this
+wind rod and apparently they took more than their share and left without taking the proper communication
+equipment okay so apart from that the word on the street is that the leadership of paradise doesn't
+care for the refugees and we're leaving them outside to starve and die and be here in shields that's the
+general sentiment well that's what i said and they looked at me like i'm some sort of monster
+i mean i'm just telling the truth so um yeah uh we have a revolt on our hands problem is uh
+at the moment the people outside the gates outnumber the people inside the gates so we just
+don't invite them to come to the people we used we used some pure rs who started organizing
+refugees into later details yeah we have a tremendous amount of work that needs to be done
+there are shelters that need to be built there are walls that need to be built
+uh piss that need to be dug feels that need to be worked there are mines that need to be secure and worked
+and all that i'm going to say it directly you will be the dust
+uh fishing needs to be done sketching needs to be done all right i'll contact um i'll contact
+durskin find out what's going down at the mine uh i will get people started on uh on doing those
+and get another team started on taking trenches where you have laid them out uh if you could just
+give me a bit of a plan or I can get it into action and uh i will get started on upgrading the
+farmers equipment and as soon as the iron comes in i will start producing more weapons i will try to
+get some more bureaucratic processes in so that we can sort the riffraff from the actual
+skilled labor uh i will start getting the word out to farmers any farmers outside the fences
+offered citizenship partnership with paradise official employment and the responsibilities and duties
+come with that uh if you wait for the tomorrow um uh don't even kind of create food and water
+so my i think the wizard can also uh yeah let's do a little bit of a charm of that
+they seem uh you missed yes we do a charm offensive we need to we need to secure but that will
+there she's uh um so we can find out what states is with durskin but we need to intervene i could also
+have if we exploit for a try to black water directly afterwards i could definitely get a propaganda
+campaign going i mean nothing rallies the troops like in us versus them propaganda machine
+exactly good i do but also be good if we start layering defenses out beyond the walls as well
+laying out plans uh in particular if we can get some of the refugees to assist in the surfing master
+uh builder can you spare a couple of you will form and to draw up people to start planning out
+so there are defenses absolutely absolutely and you can call me golf very well no and i remember
+the forge master's name was kathic it was something like kathic yes kathic yeah both master was Mike
+i remember uh and the farmer i just made up now so his name is Elaine
+not Alan Elaine hard master it would also be good if ships that were coming and going
+were also uh briefed on how to spot our particular species of a warrior in uh strategic edge
+scouting information about star level movement from cdc or opportunity to gather
+supplies for food with landings if that's what you need to do i heard some rumors that there was some ships
+left in idolos harbour it is actually that we can protect it it's just rumors that we got from
+refugees it came from idolore we don't have any confirmed reports see with the
+all the fact that they are all the fact that they are all the fact that they are
+they are all the salvage you can be launched make sure those refugees are too good like
+i'll send out a skimmer it will be that will probably be the quickest to scout this out and confirm
+the reports make sure that everybody is we need to always say if they have
+but what what what is the what is the mode of subaronda if we encounter star spawn
+the other the kind of the number now I'll catch on to the group is
+these people don't know about our trap dot or may have capabilities except that of the
+them deleted uh as you can figure out on a fact it's not on the water but they don't try to engage
+I have to be a little bit scared.
+Simply pick a little bit of them in your own.
+Just a few of them.
+Just a few.
+How do they think we say it?
+Oh, you're a captain.
+Yes, you're a bit...
+You're...
+Are you a...
+Where are we?
+Oh, yeah, I am.
+Why do you call?
+Oh, yeah.
+That's good.
+I like it.
+All right.
+So people, people are on missions now.
+It's...
+The one that...
+Looks like it's going to need you guys to do it is...
+Blackwater.
+Have we...
+We've got...
+We've got...
+We've got...
+We've got...
+We've got...
+We've got...
+We've got...
+She's...
+Just gone off to go and do that.
+You can just wait for it to come back or...
+Is there anything else you want to get ready so long?
+I think we've got everything planned out...
+How are we going to handle each of these problems?
+Well...
+I have not yet...
+Field...
+How are we going to handle...
+The whole...
+We need your situation.
+Yes.
+So you know how we now have a bulldozer.
+We are going to do the fuck out of the earth there.
+And make an artificial crater.
+So that anybody who teleports to that meteor is going to find cells at the bottom of that crater.
+That crater is going to have...
+...sickleboss seeds.
+That's how it will grow.
+Which will be casting plant growth.
+And ensuring that there is a 100-foot radius circle of...
+...sickleboss in that crater for people to teleport into.
+Because, honestly, fuck there.
+Now, if we have the spare iron, we will also be installing...
+...caltrops everywhere in that crater.
+It is going to be so bad that in order to get there...
+...you are going to have to do some kind of a weird tricky swim...
+...off of a crane that we build next to it.
+Or in any actual crater.
+Or in an airship, yeah, actually an airship might be better.
+Or that does require us to be present there.
+At first an airship will work on making it accessible to other people...
+...some other way up to there today.
+Okay, can we make it...
+...so...
+...for someone?
+It's where...
+Can we make it so that if you teleport through...
+...somehow we drown in salt water...
+I'm sure we could flood it with salt water, somehow.
+But if you're afraid you're friendly and you don't...
+...you don't make it at least.
+Then it sticks at all.
+And it's on the way to checking out...
+...to checking out what's happening at Blackwater.
+Because if you can get there...
+Blackwater is also good because...
+...we also need wood shipments to start again.
+It's also a staging location...
+...because there is a very wide river that they did use ships...
+...to get up the river to Odeomaria.
+Yeah.
+And ships...
+...thought it paved me to admit it.
+ship's...
+...or a better transport methodology for cannons for 9 and...
+...yes.
+I've got to respect...
+...got to put some respect.
+Boy in C is one hell of a game.
+Okay.
+So, Serena comes back and...
+And she says that Dusk says that it seems like the mind is abandoned.
+He's not sure when you called before traveling through, he says that his father answered.
+But now he's unable to contact it.
+The mind is secure and there is a supply of iron that's already been harvested.
+So this is the squad boss, this is the squad boss.
+As well as a brother rather large collection of crystals that were stashed away.
+If we can get more people there, I think Dusk can run the mind, but we might want to put a look out for what happened to the miners.
+We can't find the father, there are probably in the stuff that I don't know.
+What's more important is trying your miners or scrim the twins are still the ship.
+If we all live it, no, no, we're alive.
+All the evidence is pointing towards that, yes.
+It has no chance to fail, even if we...
+My chance is a technically...
+No, no, no, no, no.
+The father said that, I mean in his last contact to this father, Dusk, the last time he saw his father was when he said to buy to his father when they left you, the boss.
+Why did they be hacked?
+There's something like that.
+We can't actually get like that.
+Exactly.
+Because if we don't have that, if we just have a garland or whatever, is that it?
+That's a nice word on the eve.
+That's very good still fail.
+Do they know that you're trying to scrim them?
+No.
+Probably not.
+Why did they have to do it?
+I don't understand.
+Is this only to know?
+Because I mean, if they knew you were trying to scrim, they would be like hell, yes.
+I'm over here.
+Well...
+Can't.
+You can't.
+Yeah, if you press it, then you can.
+Tell us a little.
+We can't.
+We can't.
+We can't.
+We can't.
+We can't.
+We can't.
+We can't.
+We can't.
+We don't need to try to do.
+I can only reply to that to 25 words.
+I mean, if they.
+They reply to our shades.
+If they reply.
+Oh, yes, sorry.
+You were just digging very deeply and greeting.
+That's right.
+That's right.
+The rest will be better.
+And we don't necessarily.
+It's going to be a little better.
+Actually, it shows up.
+There I said it.
+Hmm?
+I mean, they are dwarfs, or we expect them to.
+Yeah, there wasn't underdog.
+Connection, that was.
+Yes?
+Yeah.
+You know, if they know it, it's only if they know you're casting it, they can choose to
+feel that.
+You don't even know if they know you're casting it.
+But we can get ascending to them, it will form them so that they can, in fact, fail the safe voluntarily.
+We now need to say no, and so that they know that they can speak or signal somehow what their fate is where they are.
+Help, help is likely to be on the way.
+We're talking about the twins.
+No.
+The minus.
+Yes.
+Yes.
+Yes.
+Yes.
+Yeah.
+Yeah.
+What I'm more saying is that we...
+Do you get...
+Do you get it?
+Sorry.
+Yes.
+Finish your sentence.
+Not bad.
+Oh yeah.
+That...
+I was just going to say that...
+Using scrying on the micrassism is as a more...
+Surefire way.
+Like the twins, they can still make the save and not be scrying and just not do anything.
+But if we...
+Yeah.
+If you're sending the say, hey, we're going to describe you to...
+Come and help you then they can fill the save voluntarily and we can just...
+Talk to them basically or like they can talk to us at least.
+Yeah.
+Yes.
+Um...
+In the meantime we can also go pick up the item.
+At least we can check that out.
+Yeah.
+I can send a party.
+For what the word is for people who transport stuff.
+I was...
+I was...
+I see this.
+I would send a party of...
+Delivery...
+A delivery party through...
+Transport...
+The...
+The iron...
+But...
+What will we do about the production?
+We're going to try to recover...
+Uh...
+The miners...
+They're preparing a communication package...
+In order to prepare a strike package...
+In order to execute a rescue mission.
+Uh...
+In the meantime...
+It will be good if we can spare the girls or at least...
+Arm up...
+Um...
+And you refugees...
+Hold it.
+Then we can at least...
+Uh...
+Secure the miners maybe find out what's going on there.
+I will...
+I will organize some guards and...
+To find...
+Not only thinking to people but also people who can fight...
+Who will make...
+Who would extra hands...
+Regardless of...
+Whether or not...
+Um...
+Can in fact rescue...
+Uh...
+The original miners...
+I'm sure that...
+Um...
+They will appreciate some additional help...
+To meet the new production quotas...
+And find some people...
+I would like to also point out to you...
+That you know exactly how many crystals there are...
+And that they are not a priority...
+And that they are not to be...
+Uh...
+Going miss...
+You're a little crystal operations...
+You're gonna...
+Be exposed...
+Haha...
+Okay...
+So...
+Well...
+Is it because that was the other thing...
+We were...
+Not sharing with the mayor...
+Yeah...
+Yeah...
+Wait, this isn't really better anymore because we are the mayor...
+Yeah, it's been...
+It's been of the books...
+So he's...
+It's just been of the books that I just didn't know about it...
+Not even...
+Not even...
+We're not...
+We're not...
+We're not actually revealing the fact that we have a...
+A agreement or anything...
+We just said...
+Hey...
+Our intelligence tells us that there's a bunch of crystals there...
+And you're not to touch it...
+Mm-hmm...
+Was he touched?
+How many of them are...
+You see that long ago going missing?
+Actually...
+Okay...
+So...
+Uh...
+Next step in the course of action...
+You've got...
+You've got sort of...
+You've got sort of...
+You've got...
+You've got...
+Getting...
+Skilled hands...
+Planned out...
+With the mayor...
+You've got...
+Getting the farmers...
+Involved...
+And rounded up...
+And...
+And...
+Sending out farmers...
+With their new weapons...
+To...
+Uh...
+Closest farms first...
+And then they...
+Fits that food...
+And then...
+Start...
+Expanding outwards...
+And...
+We're claiming their farms...
+Um...
+We're going to want to...
+Very...
+Probably less than...
+A little bit...
+So...
+Grrr...
+Grrr...
+And then...
+This half...
+Ah...
+This half...
+Right here...
+Just twice...
+Okay...
+And you have...
+The...
+The...
+Builders...
+You...
+The builders...
+Getting more people to help with them...
+More teams to help...
+I'm beginning the building of...
+The...
+The...
+Outer defenses...
+The walls...
+And...
+Um...
+Also...
+Um...
+You said...
+Make shift shelters...
+Outside the...
+So that...
+So that everyone's in tents anymore...
+Oh...
+You...
+How the...
+Shut up...
+Shut up...
+All right...
+And then to call the unrest...
+You guys are...
+There's a propaganda campaign...
+Yeah...
+Of course...
+Okay...
+You guys are gonna make them some food...
+What...
+What I'm...
+Okay...
+Is if we can get some food...
+And then if we can...
+And then if we can...
+Kiss some babies...
+Yeah...
+And...
+The...
+The...
+The...
+What...
+The...
+The...
+The...
+The...
+The...
+The...
+The...
+The...
+Um...
+What would we become on the bed?
+Our students...
+Our...
+And...
+GAM!
+GAM!
+GAM!
+GAM!
+GAM!
+GAM!
+GAM!
+What...
+Do this make...
+Very public...
+A...
+A...
+Of...
+Recruiting...
+Some...
+Some...
+Some...
+Some...
+Some...
+Right...
+And then we'll get another like food...
+And ...
+And then...
+And then...
+And then...
+And...
+If we can get like...
+Uh...
+Eh...
+If we can get that least...
+Cause that...
+We can go to...
+It's a...
+It's a 50-15 people...
+And then...
+And then...
+And then...
+And then...
+If we can get like...
+Uh...
+If we can get like...
+You're an a...
+I have left. However, that will occur on the cost of plant growth and plant growth.
+Yes.
+So, would you be able to do a few of them?
+Basically, what I want to do is make a positive example.
+If you agree to work for us, you get fed, you get booze.
+You just have to come work.
+To counter the narrative that we are like, don't give a shit.
+Because everybody who signs up gets a signing bonus of a day's food.
+And animal rations, right?
+The animal rations grow.
+Yeah.
+And then, hopefully, after they finished work, they'll go back.
+And they'll say, hey, I got fed.
+I got fed. I got my, you just have to sign up for work detail.
+For detail.
+And then, try and then hopefully, you know,
+hopefully, you know, take it from there and extend, hopefully,
+the bureaucrats can get bureaucratic.
+Yeah.
+We'll organize the various work detail.
+But we will lead for way.
+We will show that we are taking executive action.
+We are doing the facts stuff.
+The now stuff, the address of the emergencies.
+Setting the example.
+And then, we've got a giant bureaucracy behind us.
+We've got a giant organization behind us who's going to continue.
+Yeah.
+We can actually, we can do that in several fronts,
+because Craig can also help tremendously with digging of the ditches, for example,
+because Craig can dig 600 ditches an hour,
+which is, you know, more than a human can.
+Well, can bulldoze on a whole,
+large section around the, uh,
+the giant stone to begin with.
+Bless a field,
+and probably feed about 160 people as well as that.
+We, with low strider, or hey,
+can we make Craig do extra fast digging of ditches?
+Uh, so long strider does help haste.
+It helps, but it's like, it's too short.
+Yeah, fair to make a big difference.
+What we want to do is we want to be doing things on the scale of an hour.
+Yeah, fair.
+I also don't think I have haste.
+I was just thinking maybe something along those lines.
+Yeah.
+A little strider if it helps, that's great.
+Every long strider that you can cast is a long strider, right?
+Don't have to cast it.
+Every long strider, don't have to cast is ten people fed.
+Yeah, exactly.
+Grace.
+Also, I think you'll cast every time to say.
+Can we take it?
+Sure, that will help.
+Can we take a quick, like, five minute break?
+Let's see, you get some snack, some drinks, some water, and stuff.
+Yes.
+Yeah, that works out by both of you.
+Okay.
+Great.
+We'll close well.
+Eight or nine past.
+Yep.
+I'm looking about what I can do right now to help the, uh,
+I don't have that many cleric key cleric spells prepared.
+I could do a shit out of healing word.
+I mean, that works.
+But that is sort of, uh, it for my very, uh, cleric key cleric spells.
+Yeah.
+You need any word works.
+Do they have a key cleric trying to feed the cleric?
+Yeah.
+Yeah.
+Um.
+Do you talk to me?
+Talk to me?
+Talk to me.
+Yeah.
+And then the next day, I can prepare to wait for the water to do our, uh, uh,
+Or if you actually have some food and, uh,
+This is okay.
+Just use that too.
+Uh.
+Yeah.
+Basically by the loyal team of people right now,
+And then by the time you need more food,
+Me, can.
+So it's a simple one.
+It's a good battery.
+So it's a good battery.
+Yeah.
+I could purify food and drink if it has,
+Poiled food.
+So I could,
+What do you want me to do that, AC?
+But it, it means anything else.
+Yeah.
+I can, uh,
+Uh, battery cage.
+I think that's nice.
+I mean, the battery is full of a hole.
+Because the battery can't control other,
+But this isn't it.
+Yes.
+Yeah.
+Yeah.
+That's cool.
+I can,
+Yeah.
+I can use that too.
+Uh,
+That, I don't,
+I,
+I,
+Um,
+Um,
+My,
+My, my, my, my, my, my, my, my, my, my, my,
+Yeah.
+Yeah.
+I,
+Um,
+Uh,
+I,
+Um,
+uh,
+I,
+Buy,
+Um,
+You can maybe do slightly better than that, because you turn things into 200 gold pieces with a stuff front.
+You know, with my child, the NFC is just 100 gp worth, yep.
+And there's a 200 in total.
+And I believe that all is worth half as much as I in itself.
+We have that this K-Bills is reflying, or we need fabricated straight from all two goods.
+Yeah.
+So that make 400 gp worth of iron.
+And iron bars, really iron is worth the same as copper.
+200 gp is, sorry, 400 gp is 40,000 copper pieces.
+So that is 800 pounds of iron that you can put it out of effectively just money.
+Yeah.
+Or that 800 pounds of of goods.
+If we assume that a tool head, you actually need the tool head.
+We can even use, we can even for, we can even make it, because obviously, you know, the thing about, about, you know, the temporary schools from weapons,
+is that weapons need to be of the tougher, right?
+Can we, if we go to the blocking swords with your, or, or, but we can, if you can use, like, we could even could easily fabricate saw dust of the blackwood.
+Uh, then into, tool, into weapon handles.
+Yeah.
+Yeah.
+Recycle, like, waste, wood, into, so they're like, they're full grey dust.
+Mind you, fabricated, actually, have to be a process that you can actually do.
+It's not magic.
+It, it, it, it, it lets you, cheese out an amount of work, but it doesn't lead all to the nature of the work that you're doing.
+I'm working the, the child of that.
+That, that's just going to change the nature of it.
+It's like, an alchemist's wet tree.
+Oh, come on, let's, let's, let's, let's, let's, let's, let's go.
+
+
+Generate structured campaign notes as specified.
